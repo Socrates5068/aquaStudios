@@ -23,7 +23,7 @@
                         </figure>
                         <div class="py-4 px-6">
                             <h1 class="text-lg font-semibold">
-                                <a href="">
+                                <a href="{{ route('services.show', $service) }}">
                                     {{ $service->name }}
                                 </a>
                             </h1>
@@ -56,9 +56,9 @@
                             </div>
                             <div class="mt-auto mb-6">
                                 
-                                <x-jet-danger-button>
+                                <x-danger-enlace href="{{ route('services.show', $service) }}">
                                     Más información
-                                </x-jet-danger-button>
+                                </x-danger-enlace>
                             </div>
                         </div>
                     </article>

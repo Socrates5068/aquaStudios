@@ -11,7 +11,7 @@
                             </figure>
                             <div class="py-4 px-6">
                                 <h1 class="text-lg font-semibold">
-                                    <a href="">
+                                    <a href=" {{ route('services.show', $service) }} ">
                                         {{$service->name}}
                                     </a>
                                 </h1>
