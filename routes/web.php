@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use PHPUnit\Framework\Reorderable;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,7 @@ Route::get('services/{service}', [ServiceController::class, 'show'])->name('serv
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('prueba', function () {
+    \Cart::destroy();
+});
