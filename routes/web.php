@@ -6,6 +6,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\ShoppingCart;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', WelcomeController::class);
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');
+
+Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
