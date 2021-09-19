@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->enum('envio_type', [1, 2]);
             $table->float('shipping_cost');
             $table->float('total');
+            $table->json('content');
             $table->string('invitation')->nullable();
             $table->string('name_contact');
             $table->string('phone_contact');

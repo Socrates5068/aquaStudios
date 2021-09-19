@@ -6,6 +6,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Livewire\CreateOrder;
 use App\Http\Livewire\ShoppingCart;
 
@@ -27,3 +28,5 @@ Route::get('services/{service}', [ServiceController::class, 'show'])->name('serv
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
+
+Route::get('orders/{order}/payment', [OrderController::class, 'payment'])->name('orders.payment');
