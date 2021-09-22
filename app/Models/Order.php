@@ -18,6 +18,7 @@ class Order extends Model
     const TERMINADO = 4;
     const ENVIADO = 5;
     const ENTREGADO = 6;
+    const ANULADO = 7;
 
     public function user(){
         return $this->belongsTo(User::class);
