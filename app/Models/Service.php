@@ -13,7 +13,7 @@ class Service extends Model
     const DRAFT = 1;
     const POST = 2;
 
-    protected $fillable = ['name', 'description', 'categories_id'];
+    protected $fillable = ['name', 'description', 'image', 'categories_id'];
 
     #One to many reverse
     public function category(){
