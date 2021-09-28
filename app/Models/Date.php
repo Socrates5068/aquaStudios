@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Date extends Model
 {
     use HasFactory;
 
     protected $fillable = ['date', 'time', 'uuid'];
+
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
 }

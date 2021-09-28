@@ -23,5 +23,9 @@
                 @livewire('add-cart-item', ['service' => $service])
             </div>
         </div>
+        <div class="text-gray-700 mt-6">
+            <h2 class="font-bold text-lg">Descripción</h2>
+            {!!$service->description!!}
+        </div>
     </div>
 </x-app-layout>

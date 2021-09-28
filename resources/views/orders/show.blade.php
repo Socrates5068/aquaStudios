@@ -4,7 +4,7 @@
             <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
                 <div class="relative">
                     <div class="{{ ($order->status >=2) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12  flex items-center justify-center">
-                        <i class="fas fa-check text-white"></i>
+                        <i class="fab fa-amazon-pay text-white"></i>
                     </div>      
                     
                     <div class="absolute -left-3 mt-0.5">
@@ -66,7 +66,7 @@
                 <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
                     <div class="relative">
                         <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
-                            <i class="fas fa-check text-white"></i>
+                            <i class="fab fa-amazon-pay text-white"></i>
                         </div>      
                         
                         <div class="absolute -left-3 mt-0.5">

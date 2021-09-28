@@ -15,10 +15,12 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->uuid('id_order');
             $table->string('route_image');
             $table->enum('status', [1, 2])->default(1);
             $table->timestamps();
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

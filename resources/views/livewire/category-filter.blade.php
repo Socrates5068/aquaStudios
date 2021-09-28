@@ -3,7 +3,7 @@
         <div class="px-6 py-2 flex justify-between items-center">
             <h1 class="font-semibold text-gray-700 uppercase">{{ $category->name }}</h1>
 
-            <div class="grid grid-cols-2 border border-gray-200 divide-x divide-gray-200 text-gray-500">
+            <div class="hidden md:block grid grid-cols-2 border border-gray-200 divide-x divide-gray-200 text-gray-500">
                 <i class="fas fa-border-all p-3 cursor-pointer {{ $view == 'grid' ? 'text-blue-500' : '' }}"
                     wire:click="$set('view', 'grid')"></i>
                 <i class="fas fa-th-list p-3 cursor-pointer {{ $view == 'list' ? 'text-blue-500' : '' }}"
@@ -31,6 +31,12 @@
                                 {{ $service->price }}
                             </p>
                         </div>
+                        <div class="ml-2 mt-4 md:mt-auto mb-2">
+                                
+                            <x-danger-enlace href="{{ route('services.show', $service) }}">
+                                Más información
+                            </x-danger-enlace>
+                        </div>
                     </article>
                 </li>
             @endforeach
@@ -39,9 +45,9 @@
         <ul>
             @foreach ($services as $service)
                 <li class="bg-white rounded-lg shadow mb-4">
-                    <article class="flex">
+                    <article class="md:flex">
                         <figure>
-                            <img class="h-48 w-56 object-cover object-center" src="{{ Storage::url($service->image) }}"
+                            <img class="h-48 w-full md:w-56 object-cover object-center" src="{{ Storage::url($service->image) }}"
                                 alt="">
                         </figure>
 
@@ -54,7 +60,7 @@
                                     <p class="font-bold text-gray-700">BOB {{ $service->price }}</p>
                                 </div>
                             </div>
-                            <div class="mt-auto mb-6">
+                            <div class="mt-4 md:mt-auto mb-2">
                                 
                                 <x-danger-enlace href="{{ route('services.show', $service) }}">
                                     Más información

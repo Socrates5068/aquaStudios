@@ -31,6 +31,14 @@ class EditService extends Component
 
         $this->service->save();
         $this->emit('saved');
+
+        /* return redirect(route('admin.index')); */
+    }
+
+    public function updateState($state){
+        $this->service->status = $state;
+        $this->service->save();
+        /* $this->emit('saved'); */
     }
 
     public function render()

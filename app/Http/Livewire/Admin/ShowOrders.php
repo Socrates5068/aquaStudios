@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Order;
 use Livewire\Component;
 
 class ShowOrders extends Component
 {
     public function render()
     {
-        return view('livewire.admin.show-orders');
+        $orders = Order::paginate(10);
+
+        return view('livewire.admin.show-orders', compact('orders'))->layout('layouts.admin');
     }
 }
