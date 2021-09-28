@@ -11,21 +11,21 @@
         </div> --}}
 
         @if ($order->status != 7)
-            <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 items-center lg:flex md:flex">
 
                 <div class="relative">
                     <div
-                        class="{{ $order->status >= 1 ? 'bg-blue-400' : 'bg-gray-400' }} rounded-full h-12 w-12  flex items-center justify-center">
+                        class="{{ $order->status >= 1 ? 'bg-blue-400' : 'bg-gray-400' }} rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-hourglass-end text-white cursor-pointer"
                         wire:click="updateState({{"1"}})"></i>
                     </div>
 
-                    <div class="absolute -left-3 mt-0.5">
+                    <div class="sm:absolute -left-3 mt-0.5">
                         <p class="text-sm">Pendiente</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 2 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 2 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -34,12 +34,12 @@
                         wire:click="updateState({{"2"}})"></i>
                     </div>
 
-                    <div class="absolute -left-3 mt-0.5">
+                    <div class="sm:absolute -left-3 mt-0.5">
                         <p class="text-sm">Confirmado</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 3 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 3 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -48,12 +48,12 @@
                             wire:click="updateState({{"3"}})"></i>
                     </div>
 
-                    <div class="absolute -left-1 mt-0.5">
+                    <div class="sm:absolute -left-1 mt-0.5">
                         <p class="text-sm">Editando</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 4 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 4 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -61,12 +61,12 @@
                         <i class="fas fa-photo-video {{ $order->status >= 4 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"4"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm">Terminado</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 5 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 5 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -74,12 +74,12 @@
                         <i class="fas fa-truck {{ $order->status >= 5 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"5"}})"></i>
                     </div>
-                    <div class="absolute mt-0.5">
+                    <div class="sm:absolute mt-0.5">
                         <p class="text-sm">Enviado</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 6 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 6 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -87,12 +87,12 @@
                         <i class="fas fa-compact-disc {{ $order->status >= 6 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"6"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm">Entregado</p>
                     </div>
                 </div>
 
-                <div class="{{ $order->status >= 7 ? 'bg-blue-400' : 'bg-gray-400' }} h-1 flex-1 mx-2"></div>
+                <div class="{{ $order->status >= 7 ? 'bg-blue-400' : 'bg-gray-400' }} sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div
@@ -100,32 +100,32 @@
                         <i class="fas fa-times-circle {{ $order->status >= 7 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"7"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm">Anulado</p>
                     </div>
                 </div>
             </div>
         @else
-            <div class="bg-red-600 rounded-lg shadow-lg px-6 py-4 mb-6 items-center">
+            <div class="bg-red-600 rounded-lg shadow-lg px-6 py-4 mb-6 items-center lg:flex md:flex">
                 <p class="text-center text-lg text-white font-bold">
                     ANULADO
                 </p>
             </div>
-            <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 items-center lg:flex md:flex">
 
                 <div class="relative">
                     <div
-                        class="bg-red-400 rounded-full h-12 w-12  flex items-center justify-center">
+                        class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-hourglass-end text-white cursor-pointer"
                         wire:click="updateState({{"1"}})"></i>
                     </div>
 
-                    <div class="absolute -left-3 mt-0.5">
+                    <div class="sm:absolute -left-3 mt-0.5">
                         <p class="text-sm">Pendiente</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
@@ -133,12 +133,12 @@
                             wire:click="updateState({{"2"}})"></i>
                     </div>
 
-                    <div class="absolute -left-3 mt-0.5">
+                    <div class="sm:absolute -left-3 mt-0.5">
                         <p class="text-sm line-through">Confirmado</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
@@ -146,55 +146,55 @@
                             wire:click="updateState({{"3"}})"></i>
                     </div>
 
-                    <div class="absolute -left-1 mt-0.5">
+                    <div class="sm:absolute -left-1 mt-0.5">
                         <p class="text-sm line-through">Editando</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-photo-video {{ $order->status >= 4 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"4"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm line-through">Terminado</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-truck {{ $order->status >= 5 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"5"}})"></i>
                     </div>
-                    <div class="absolute mt-0.5">
+                    <div class="sm:absolute mt-0.5">
                         <p class="text-sm line-through">Enviado</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-compact-disc {{ $order->status >= 6 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"6"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm line-through">Entregado</p>
                     </div>
                 </div>
 
-                <div class="bg-red-400 h-1 flex-1 mx-2"></div>
+                <div class="bg-red-400 sm:h-1 flex-1 mx-2"></div>
 
                 <div class="relative">
                     <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-compact-disc {{ $order->status >= 7 ? 'text-white' : '' }} cursor-pointer"
                             wire:click="updateState({{"7"}})"></i>
                     </div>
-                    <div class="absolute -left-2 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm line-through">Anulado</p>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         @if ($order->status != 7)
-            <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            <div class="bg-white rounded-lg shadow-lg px-6 lg:px-12 py-8 mb-6 flex items-center">
                 <div class="relative">
                     <div class="{{ ($order->status >=2) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12  flex items-center justify-center">
                         <i class="fab fa-amazon-pay text-white"></i>
@@ -63,7 +63,7 @@
                     ANULADO
                 </p>
             </div>
-                <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            <div class="bg-white rounded-lg shadow-lg px-6 lg:px-12 py-8 mb-6 flex items-center">
                     <div class="relative">
                         <div class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                             <i class="fab fa-amazon-pay text-white"></i>
@@ -118,7 +118,7 @@
                             <p class="text-sm line-through">Entregado</p>
                         </div>                              
                     </div>
-                </div>
+            </div>
         @endif
         
 
@@ -184,6 +184,13 @@
             </table>
         </div>
 
-        
+        <div class="bg-white rounded-lg grid justify-items-stretch shadow-lg px-6 py-4 mb-6">
+            <div class="justify-self-end">
+                <x-button-enlace class="justify-self-end" href="{{ route('photos', $order) }}">
+                    Ver las fotos del evento
+                </x-button-enlace>
+
+            </div>
+        </div>
     </div>
 </x-app-layout>

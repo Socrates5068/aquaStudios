@@ -11,6 +11,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\ShowPhotos;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('orders/create', CreateOrder::class)->name('orders.create');
     
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('photos/{order}', ShowPhotos::class)->name('photos');
     
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
 });
