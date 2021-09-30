@@ -38,7 +38,8 @@ class EditOrder extends Component
 
         $this->order->status = $state;
         $this->order->save();
-        $this->emit('saved');
+
+        /* Telegram notify */
     }
 
     public function deletePhoto(Photo $photo){

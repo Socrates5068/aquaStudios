@@ -1,5 +1,14 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <div class="mb-6">
+            <div class="justify-self-start">
+                <x-button-enlace color="blue" class="justify-self-end" href="javascript:history.back()">
+                    Ir atrás
+                </x-button-enlace>
+            </div>
+        </div>
+
         @if ($order->status != 7)
             <div class="bg-white rounded-lg shadow-lg px-6 lg:px-12 py-8 mb-6 flex items-center">
                 <div class="relative">
@@ -184,12 +193,11 @@
             </table>
         </div>
 
-        <div class="bg-white rounded-lg grid justify-items-stretch shadow-lg px-6 py-4 mb-6">
+        <div class="grid justify-items-stretch px-6 py-4 mb-6">
             <div class="justify-self-end">
-                <x-button-enlace class="justify-self-end" href="{{ route('photos', $order) }}">
+                <x-button-enlace color="blue" class="justify-self-end" href="{{ route('photos', $order) }}">
                     Ver las fotos del evento
                 </x-button-enlace>
-
             </div>
         </div>
     </div>

@@ -22,4 +22,9 @@ class OrderController extends Controller
             'route_image' => $url,
         ]);
     }
+
+    public function photos(Order $order)
+    {
+        return view('admin.orders.photos', compact('order'));
+    }
 }

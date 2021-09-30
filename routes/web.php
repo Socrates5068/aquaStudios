@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShowPhotos;
 use Faker\Provider\ar_SA\Payment;
 use App\Http\Livewire\CreateOrder;
 use PHPUnit\Framework\Reorderable;
@@ -7,11 +8,11 @@ use App\Http\Livewire\PaymentOrder;
 use App\Http\Livewire\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PhotoController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Livewire\ShowPhotos;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('photo/{order}', [PhotoController::class, 'photos'])->name('photos.download');
 
     Route::get('orders/create', CreateOrder::class)->name('orders.create');
     

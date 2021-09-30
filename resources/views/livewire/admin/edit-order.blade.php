@@ -260,18 +260,48 @@
 
         @if($order->photos->count())
             <section class="bg-white shadow-xl rounded-lg p-6 mt-4">
-                <h1 class="text-2xl text-center font-semibold mt-2">Imagenes del evento</h1>
+                <h1 class="uppercase text-center font-semibold mb-2">Imagenes del evento</h1>
                 <ul class="flex flex-wrap">
                     @foreach($order->photos as $photo)
-                        <li class="relative" wire:key="photo-{{$photo->id}}">
-                            <img class="w-32 h-20 object-cover flex" src="{{ Storage::url($photo->route_image) }}" alt="">
-                            <x-jet-danger-button class="absolute right-2 top-2"
-                                wire:click="deletePhoto({{$photo->id}})"
-                                wire:loading.attr="disabled"
-                                wire:target="deletePhoto({{$photo->id}})">
-                                x
-                            </x-jet-danger-button>
-                        </li>
+                        @if ($photo->status == 1)
+                            <li class="relative" wire:key="photo-{{$photo->id}}">
+                                <img class="w-32 h-20 object-cover flex" src="{{ Storage::url($photo->route_image) }}" alt="">
+                                <x-jet-danger-button class="absolute right-2 top-2"
+                                    wire:click="deletePhoto({{$photo->id}})"
+                                    wire:loading.attr="disabled"
+                                    wire:target="deletePhoto({{$photo->id}})">
+                                    x
+                                </x-jet-danger-button>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
+        @if($order->photos->count())
+        <section class="bg-white shadow-xl rounded-lg p-6 mt-4">
+            <h1 class="uppercase text-center font-semibold mb-2">Imagenes seleccionadas por el usuario</h1>
+            <div class="grid justify-items-stretch px-6 py-4">
+                <div class="justify-self-end">
+                    <x-button-enlace color="blue" class="justify-self-end" href="{{ route('admin.orders.photos', $order) }}">
+                        Descargar fotos
+                    </x-button-enlace>
+                </div>
+            </div>
+                <ul class="flex flex-wrap">
+                    @foreach($order->photos as $photo)
+                        @if ($photo->status == 2)
+                            <li class="relative" wire:key="photo-{{$photo->id}}">
+                                <img class="w-32 h-20 object-cover flex" src="{{ Storage::url($photo->route_image) }}" alt="">
+                                <x-jet-danger-button class="absolute right-2 top-2"
+                                    wire:click="deletePhoto({{$photo->id}})"
+                                    wire:loading.attr="disabled"
+                                    wire:target="deletePhoto({{$photo->id}})">
+                                    x
+                                </x-jet-danger-button>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </section>
