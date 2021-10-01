@@ -105,6 +105,13 @@
                     </div>
                 </div>
             </div>
+            <div class="grid justify-items-stretch">
+                <div class="justify-self-end">
+                    <x-button-enlace color="blue" class="justify-self-end" href="{{ $whatsApp }}" target="_blank">
+                        notificar al usuario por WhatApp
+                    </x-button-enlace>
+                </div>
+            </div>
         @else
             <div class="bg-red-600 rounded-lg shadow-lg px-6 py-4 mb-6 items-center lg:flex md:flex">
                 <p class="text-center text-lg text-white font-bold">
@@ -199,9 +206,16 @@
                     </div>
                 </div>
             </div>
+            <div class="grid justify-items-stretch">
+                <div class="justify-self-end">
+                    <x-button-enlace color="red" class="justify-self-end" href="{{ $whatsApp }}" target="_blank">
+                        notificar al usuario por WhatApp
+                    </x-button-enlace>
+                </div>
+            </div>
         @endif        
 
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid grid-cols-2 gap-6 text-gray-700">
                 <div>
                     <p class="text-lg font-semibold uppercase">Envío</p>

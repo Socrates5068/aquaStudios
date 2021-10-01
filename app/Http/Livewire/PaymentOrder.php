@@ -15,13 +15,21 @@ class PaymentOrder extends Component
 
     protected $listeners = ['payOrder'];
 
-    public function mount(Order $order){
+    public function mount(Order $order)
+    {
         $this->order = $order;
     }
 
-    public function payOrder(){
+    public function payOrder()
+    {
         $this->order->status = 2;
         $this->order->save();
+
+        /* Telegram notify */
+        $bot = new \TelegramBot\Api\BotApi(env('BOT_API_TOKEN_TELEGRAM'));
+        $id= strval($this->order->id);
+        $bot->sendMessage("-426827268", 'Se ha registrado una orden, ver la orden en http://aquastudios.test/admin/orders/' . $id . '/edit');
+        
 
         return redirect()->route('orders.show', $this->order);
     }

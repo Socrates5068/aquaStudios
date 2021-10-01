@@ -10,6 +10,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "ixudra/curl": "^6.21",
         "jenssegers/date": "^4.0",
         "laravel-lang/lang": "~7.0",
         "laravel/framework": "^8.40",
@@ -18,7 +19,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "maennchen/zipstream-php": "^2.1",
-        "spatie/laravel-permission": "^5.1"
+        "spatie/laravel-permission": "^5.1",
+        "telegram-bot/api": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

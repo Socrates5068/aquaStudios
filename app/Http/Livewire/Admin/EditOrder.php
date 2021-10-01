@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class EditOrder extends Component
 {
     public $order, $status;
+    public $whatsApp, $message;
 
     protected $rules = [
         'order.status' => 'required'
@@ -20,8 +21,40 @@ class EditOrder extends Component
         $this->order = $order;
         $this->status = $order->status;
 
-        /* $this->categories = Category::all();
-        $this->category_id = $order->category_id; */
+        /* WhatsApp notify */
+        $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
+        $phone = '591' . 61883536;
+
+        switch ($order->status) {
+            case '1':
+                $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '2':
+                $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '3':
+                $this->message = "Su orden a cambiado al estado EN EDICIÖN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '4':
+                $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '5':
+                $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '6':
+                $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '7':
+                $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            default:
+            $this->message = "hola";
+                break;
+        }
+
+        $this->whatsApp = $apiWhatsApp . $phone . '&text=' . $this->message;
+        
+        
     }
 
     public function save(){
@@ -39,7 +72,37 @@ class EditOrder extends Component
         $this->order->status = $state;
         $this->order->save();
 
-        /* Telegram notify */
+        /* WhatsApp notify */
+        $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
+        $phone = '591' . 61883536;
+
+        switch ($this->order->status) {
+            case '1':
+                $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '2':
+                $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '3':
+                $this->message = "Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '4':
+                $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '5':
+                $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '6':
+                $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            case '7':
+                $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                break;
+            default:
+            $this->message = "hola";
+                break;
+        }
+        $this->whatsApp = $apiWhatsApp . $phone . '&text=' . $this->message;
     }
 
     public function deletePhoto(Photo $photo){
