@@ -2,24 +2,36 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Photo;
 use Livewire\Component;
+use App\Notifications\NotifyUser;
 use Illuminate\Support\Facades\Storage;
 
 class EditOrder extends Component
 {
+
     public $order, $status;
     public $whatsApp, $message;
+
+    public $user;
+    public $toMail = [
+        'message' => 'default',
+        'id' => 'id',
+    ];
 
     protected $rules = [
         'order.status' => 'required'
     ];
     protected $listeners = ['refreshOrder'];
 
-    public function mount(Order $order){
+    public function mount(Order $order)
+    {
         $this->order = $order;
         $this->status = $order->status;
+        /* $this->user = User::where('id', $order->user_id)->first(); */
+        $this->user = $order->user()->first();
 
         /* WhatsApp notify */
         $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
@@ -48,16 +60,15 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             default:
-            $this->message = "hola";
+                $this->message = "hola";
                 break;
         }
 
         $this->whatsApp = $apiWhatsApp . $phone . '&text=' . $this->message;
-        
-        
     }
 
-    public function save(){
+    public function save()
+    {
         $rules = $this->rules;
         $this->validate($rules);
 
@@ -65,8 +76,9 @@ class EditOrder extends Component
         $this->emit('saved');
     }
 
-    public function updateState($state){
-/*         $rules = $this->rules;
+    public function updateState($state)
+    {
+        /*         $rules = $this->rules;
         $this->validate($rules); */
 
         $this->order->status = $state;
@@ -79,40 +91,77 @@ class EditOrder extends Component
         switch ($this->order->status) {
             case '1':
                 $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '2':
                 $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su pago a sido verificado, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '3':
                 $this->message = "Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '4':
                 $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '5':
                 $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '6':
                 $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '7':
                 $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->toMail = [
+                    'message' => 'Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en el siguente enlace',
+                    'id' => $this->user->id
+                ];
+                $this->user->notify(new NotifyUser($this->toMail));
                 break;
             default:
-            $this->message = "hola";
+                $this->message = "hola";
                 break;
         }
         $this->whatsApp = $apiWhatsApp . $phone . '&text=' . $this->message;
     }
 
-    public function deletePhoto(Photo $photo){
+    public function deletePhoto(Photo $photo)
+    {
         Storage::delete([$photo->route_image]);
         $photo->delete();
 
         $this->order = $this->order->fresh();
     }
 
-    public function refreshOrder(){
+    public function refreshOrder()
+    {
         $this->order = $this->order->fresh();
     }
 
