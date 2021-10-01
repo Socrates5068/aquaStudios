@@ -13,6 +13,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::get('services/{service}', [ServiceController::class, 'show'])->name('serv
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('photo/{order}', [PhotoController::class, 'photos'])->name('photos.download');
 
