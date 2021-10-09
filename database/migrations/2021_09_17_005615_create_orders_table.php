@@ -19,6 +19,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services');
+
             $table->enum('status', [Order::PENDIENTE, Order::CONFIRMADO, Order::EDICION, Order::TERMINADO, Order::ENVIADO, Order::ENTREGADO, Order::ANULADO])->default(Order::PENDIENTE);
             $table->enum('envio_type', [1, 2]);
             $table->float('shipping_cost');

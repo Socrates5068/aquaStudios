@@ -13,6 +13,7 @@ class PaymentOrder extends Component
     use AuthorizesRequests;
 
     public $order, $user;
+    public $dates;
 
     protected $listeners = ['payOrder'];
 
@@ -38,6 +39,9 @@ class PaymentOrder extends Component
             'id' => $this->user->id
         ];
         $this->user->notify(new NotifyUser($this->toMail));
+
+        /* save date on schedule */
+
 
         return redirect()->route('orders.show', $this->order);
     }

@@ -30,7 +30,7 @@ class ServiceFactory extends Factory
             'name' => $name,
             'image' => 'services/' . $this->faker->image('public/storage/services', 640, 480, null, false),
             'description' => $this->faker->text(),
-            'price' => $this->faker->randomElement([19.99, 49.9, 99.99]),
+            'price' => $this->faker->randomElement([1.99, 4.9, 9.99]),
             'status' => 2,
             'category_id' => $category->id,
         ];

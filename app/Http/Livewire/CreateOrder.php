@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Order;
 use Livewire\Component;
+use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CreateOrder extends Component
@@ -36,9 +37,10 @@ class CreateOrder extends Component
         $this->validate($rules);
 
         $order = new Order();
-
+        $cart = Cart::content()->first();
         if ($this->envio_type == 1) {
             $order->user_id = auth()->user()->id;
+            $order->service_id = $cart->id;
             $order->envio_type = $this->envio_type;
             $order->shipping_cost = 0;
             $order->total = Cart::subtotal();
@@ -49,6 +51,7 @@ class CreateOrder extends Component
             $order->save();
         } else{
             $order->user_id = auth()->user()->id;
+            $order->service_id = $cart->id;
             $order->envio_type = $this->envio_type;
             $order->shipping_cost = $this->shipping_cost;
             $order->total = $this->shipping_cost+Cart::subtotal();

@@ -93,7 +93,7 @@ class EditOrder extends Component
                 $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -101,7 +101,7 @@ class EditOrder extends Component
                 $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su pago a sido verificado, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->uid
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -109,7 +109,7 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -117,7 +117,7 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -125,7 +125,7 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -133,7 +133,7 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
@@ -141,7 +141,7 @@ class EditOrder extends Component
                 $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
                     'message' => 'Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->user->id
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;

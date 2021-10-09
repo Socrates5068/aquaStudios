@@ -38,4 +38,8 @@ class Order extends Model
     public function addresses(){
         return $this->hasMany(Address::class);
     }
+
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }
