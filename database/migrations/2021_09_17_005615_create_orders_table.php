@@ -23,16 +23,16 @@ class CreateOrdersTable extends Migration
             $table->foreign('service_id')->references('id')->on('services');
 
             $table->enum('status', [Order::PENDIENTE, Order::CONFIRMADO, Order::EDICION, Order::TERMINADO, Order::ENVIADO, Order::ENTREGADO, Order::ANULADO])->default(Order::PENDIENTE);
-            $table->enum('envio_type', [1, 2]);
+            $table->enum('delivery_type', [1, 2]);
             $table->float('shipping_cost');
             $table->float('total');
-            $table->json('content');
-            $table->string('invitation')->nullable();
-            $table->string('name_contact');
-            $table->string('phone_contact');
+            $table->string('invitation', 100)->nullable();
+            $table->string('name_contact', 60);
+            $table->string('phone_contact', 60);
             //delivery address
             $table->string('d_address', 60)->nullable();
-            $table->uuid('uuid', 50)->nullable();
+            $table->text('comment', 2000)->nullable();
+            $table->json('dates');
 
             $table->timestamps();
         });

@@ -20,7 +20,16 @@
                         </div>
                     </div>
                 </div>
-                @livewire('add-cart-item', ['service' => $service])
+                <div class="flex">
+                    <div class="flex-1">
+                        {{-- @livewire('add-cart-item', ['service' => $service]) --}}
+                        <x-button-enlace href="{{ route('orders.create', $service) }}" color="blue" class="w-full">
+                            Comprar este servicio
+                        </x-button-enlace>
+
+                    </div>
+
+                </div>
             </div>
         </div>
         <div class="text-gray-700 mt-6">

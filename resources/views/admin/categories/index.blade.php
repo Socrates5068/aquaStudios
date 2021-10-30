@@ -4,45 +4,23 @@
     </div>
 
     @push('script')
-        {{-- <script>
-            Livewire.on('deleteCategory', categoryId => {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            LiveWire.emitTo('admin.create-category', 'delete', categoryId )
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                        }
-                    })
-                });
-        </script> --}}
         <script>
             Livewire.on('deleteCategory', categoryId => {
             
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: '¿Está seguro?',
+                    text: "¡No podrá revertir está acción!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: '¡Sí, eliminar!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.emitTo('admin.create-category', 'delete', categoryId)
                         Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
+                            '¡Eliminado!',
+                            'El registro a sido eliminado.',
                             'success'
                         )
                     }

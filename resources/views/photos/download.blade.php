@@ -5,7 +5,7 @@
     $options->setSendHttpHeaders(true);
 
     // create a new zipstream object
-    $zip = new ZipStream\ZipStream('example.zip', $options);
+    $zip = new ZipStream\ZipStream($order->user->name . '_fotos.zip', $options);
 
     foreach ($order->photos as $photo) {
         // add a file named 'some_image.jpg' from a local file 'path/to/image.jpg'

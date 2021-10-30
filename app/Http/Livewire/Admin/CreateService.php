@@ -13,9 +13,9 @@ class CreateService extends Component
     public $category_id = "";
     protected $rules = [
         'category_id' => 'required',
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required'
+        'name' => 'required|max:60',
+        'description' => 'required|max:2000',
+        'price' => 'required|numeric'
     ];
 
     public function mount()

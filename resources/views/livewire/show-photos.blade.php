@@ -9,7 +9,8 @@
             <div class="absolute inset-y-0 right-0">
                 <x-button-enlace color="blue"
                     href="{{ route('photos.download', $order) }}">
-                    Descargar todas las fotos
+                    <svg class="fill-current w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                    Descargar fotos
                 </x-button-enlace>
             </div>
 
@@ -23,10 +24,9 @@
                 @if ($photos->count())
                     @foreach ($photos as $photo)
                         <div class="group relative mb-6">
-                            <div
-                                class="{{ $photo->status == 2 ? 'border-solid border-8 border-red-600' : '' }} relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                            <div class="{{ $photo->status == 2 ? 'border-solid border-8 border-red-600' : '' }} cursor-pointer relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1"
+                                wire:click='updateStatus({{ $photo }})'>
                                 <img src="{{ Storage::url($photo->route_image) }}"
-                                    wire:click='updateStatus({{ $photo }})'
                                     class="w-full h-full object-center object-cover">
                                 <span class="relative inline-block">
                                     <span></span>

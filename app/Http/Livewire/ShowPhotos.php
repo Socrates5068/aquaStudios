@@ -13,7 +13,7 @@ class ShowPhotos extends Component
     public function mount(Order $order)
     {
         $this->order = $order;
-        $this->photos = Photo::where('order_id', $order->id)->get();
+        $this->photos = $order->photos;
 
     }
 

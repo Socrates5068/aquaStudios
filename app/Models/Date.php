@@ -10,7 +10,7 @@ class Date extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'time', 'order_id', 'category_id'];
+    protected $fillable = ['date', 'time', 'name', 'order_id', 'category_id'];
 
     public function order(){
         return $this->belongsTo(Order::class);

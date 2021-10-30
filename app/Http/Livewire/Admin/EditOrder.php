@@ -35,7 +35,7 @@ class EditOrder extends Component
 
         /* WhatsApp notify */
         $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
-        $phone = '591' . 61883536;
+        $phone = '591' . $this->user->celphone;
 
         switch ($order->status) {
             case '1':
@@ -86,7 +86,7 @@ class EditOrder extends Component
 
         /* WhatsApp notify */
         $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
-        $phone = '591' . 61883536;
+        $phone = '591' . $this->user->celphone;
 
         switch ($this->order->status) {
             case '1':
@@ -167,7 +167,8 @@ class EditOrder extends Component
 
     public function render()
     {
-        $items = json_decode($this->order->content);
-        return view('livewire.admin.edit-order', compact('items'))->layout('layouts.admin');
+        /* $items = json_decode($this->order->content);
+        return view('livewire.admin.edit-order', compact('items'))->layout('layouts.admin'); */
+        return view('livewire.admin.edit-order')->layout('layouts.admin');
     }
 }

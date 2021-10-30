@@ -17,9 +17,11 @@ class CreateDatesTable extends Migration
             $table->id();
             $table->date('date');
             $table->time('time');
-            /* $table->unsignedBigInteger('category_id'); */
+            $table->string('name', 60);
+            $table->string('url', 200);
+            $table->unsignedBigInteger('category_id')->nullable();
 
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders');
            
             $table->timestamps();

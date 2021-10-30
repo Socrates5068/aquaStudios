@@ -1,12 +1,4 @@
 <div>
-    @php
-        function convert_date_php_js($date) {
-            $converted_date = date("Y", strtotime($date)).
-            ', '.(date("n", strtotime($date))).
-            ', '.date("j", strtotime($date));
-            return $converted_date;
-        }
-    @endphp
     <div>
         @push('style')
             <link rel="dns-prefetch" href="//unpkg.com" />
@@ -81,19 +73,19 @@
                                     <div style="width: 14.28%; height: 120px"
                                         class="px-4 pt-2 border-r border-b relative">
                                         <div @click="showEventModal(date)" x-text="date"
-                                            class="inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100"
+                                            class="mt-4 inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100"
                                             :class="{'bg-blue-500 text-white': isToday(date) == true, 'text-gray-700 hover:bg-blue-200': isToday(date) == false }">
                                         </div>
                                         <div style="height: 80px;" class="overflow-y-auto mt-1">
                                             <div 
-                                                class="absolute top-0 right-0 mt-2 mr-2 inline-flex items-center justify-center rounded-full text-sm w-6 h-6 bg-gray-700 text-white leading-none"
-                                                x-show="events.filter(e => e.event_date === new Date(year, month, date).toDateString()).length"
-                                                x-text="events.filter(e => e.event_date === new Date(year, month, date).toDateString()).length">
+                                                class="absolute top-0 right-0 mt-1 md:mt-2 mr-1 md:mr-2 inline-flex items-center justify-center rounded-full text-xs md:text-sm w-4 md:w-6 h-4 md:h-6 bg-gray-700 text-white leading-none"
+                                                x-show="events.filter(e => new Date(e.event_date).toDateString() === new Date(year, month, date).toDateString()).length"
+                                                x-text="events.filter(e => new Date(e.event_date).toDateString() === new Date(year, month, date).toDateString()).length">
                                             </div>
 
                                         <template
                                             x-for="event in events.filter(e => new Date(e.event_date).toDateString() ===  new Date(year, month, date).toDateString() )">
-                                            <div class="px-2 py-1 rounded-lg mt-1 overflow-hidden border" :class="{
+                                            <div class="md:px-2 py-0.5 rounded-lg mt-1 overflow-hidden md:border" :class="{
                                                     'border-blue-200 text-blue-800 bg-blue-100': event.event_theme === 'blue',
                                                     'border-red-200 text-red-800 bg-red-100': event.event_theme === 'red',
                                                     'border-yellow-200 text-yellow-800 bg-yellow-100': event.event_theme === 'yellow',
@@ -101,7 +93,7 @@
                                                     'border-purple-200 text-purple-800 bg-purple-100': event.event_theme === 'purple'
                                                 }">
                                                 <a x-on:click="window.location=event.event_url" class="cursor-pointer">
-                                                    <p x-text="event.event_title" class="text-sm truncate leading-tight">
+                                                    <p x-text="event.event_title" class="text-xs md:text-sm truncate md:leading-tight">
                                                     </p>
                                                 </a>
                                             </div>
@@ -144,7 +136,7 @@
                                 evento</label>
                             <input
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                type="text" x-model="event_date" readonly>
+                                type="text" x-model="dateEs()" readonly>
                         </div>
 
                         <div class="inline-block w-64 mb-4">
@@ -152,20 +144,12 @@
                                 tema</label>
                             <div class="relative">
                                 <select @change="event_theme = $event.target.value;" x-model="event_theme"
-                                    class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-gray-700">
+                                    class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-gray-700"
+                                    >
                                     <template x-for="(theme, index) in themes">
                                         <option :value="theme.value" x-text="theme.label"></option>
                                     </template>
-
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                    </svg>
-                                </div>
+                                </select>                
                             </div>
                         </div>
 
@@ -173,12 +157,12 @@
                             <button type="button"
                                 class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm mr-2"
                                 @click="openEventModal = !openEventModal">
-                                Cancel
+                                Cancelar
                             </button>
                             <button type="button"
                                 class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-700 rounded-lg shadow-sm"
                                 @click="addEvent()">
-                                Save Event
+                                Guardar Evento
                             </button>
                         </div>
                     </div>
@@ -203,11 +187,28 @@
         dates.forEach(element => {
             var fecha = element.date;
             fecha = fecha.replace(/-/g,',');   
+            var theme = '';
+            switch (element.category_id) {
+                case 1:
+                    theme = 'yellow';
+                    break;
+                case 2:
+                    theme = 'green';
+                    break;
+                case 3:
+                    theme = 'red';
+                    break;
+                case 4:
+                    theme = 'purple';
+                    break;
+                default:
+                    theme = 'blue';
+            }
             var objeto = {
                 event_date: new Date(Date.parse(fecha)),
-                event_title: element.id,
-                event_theme: 'blue',
-                event_url: 'http://aquastudios.test/admin/orders/' + element.order_id + '/edit'
+                event_title: element.name,
+                event_theme: theme,
+                event_url: element.url
             }
             events.push(objeto);
         });
@@ -221,8 +222,8 @@
                 days: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
 
                 events,
-                event_title: '',
                 event_date: '',
+                event_title: '',
                 event_theme: 'blue',
                 event_url: '',
 
@@ -275,17 +276,26 @@
                         return;
                     }
 
+                    var date = {};
+                    date.event_date = this.event_date;
+                    date.event_title = this.event_title;
+                    date.event_theme = this.event_theme;
+                    date.event_url = 'schedule/delete?event_date='+this.event_date+'&event_title='+this.event_title+'&event_theme='+this.event_theme;
+
                     this.events.push({
                         event_date: this.event_date,
                         event_title: this.event_title,
-                        event_theme: this.event_theme
+                        event_theme: this.event_theme,
+                        event_url: 'schedule/delete?event_date='+this.event_date+'&event_title='+this.event_title+'&event_theme='+this.event_theme,
                     });
 
-                    console.log(this.events);
+                    Livewire.emit('saveDate', JSON.stringify(date));
+
+                    //console.log(this.events);
 
                     // clear the form data
-                    this.event_title = '';
                     this.event_date = '';
+                    this.event_title = '';
                     this.event_theme = 'blue';
                     event_url: '';
 
@@ -310,10 +320,15 @@
 
                     this.blankdays = blankdaysArray;
                     this.no_of_days = daysArray;
+                },
+
+                dateEs() {
+                    const event = new Date(this.event_date);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    return event.toLocaleDateString('es-ES', options);
                 }
             }
         }
     </script>
-    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script> --}}
 @endpush
 </div>

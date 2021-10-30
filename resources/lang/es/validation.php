@@ -136,6 +136,40 @@ return [
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
+        'contact'    => [
+            'required' => 'El nombre de contacto es obligatorio.',
+        ],
+        'phone'    => [
+            'required' => 'El teléfono de contacto es obligatorio.',
+            'numeric' => 'El teléfono debe ser numérico.',
+        ],
+        'address'    => [
+            'required' => 'La dirección es obligatoria',
+        ],
+        'address_1'    => [
+            'required' => 'La dirección principal es obligatoria',
+        ],
+        'lat'    => [
+            'required' => 'La ubicación en el mapa es obligatoria',
+        ],
+        'lat1'    => [
+            'required' => 'La segunda ubicación en el mapa es obligatoria',
+        ],
+        'dates.date'    => [
+            'required' => 'La fecha principal del evento es obligatoria',
+        ],
+        'dates.time'    => [
+            'required' => 'La hora del evento es obligatoria',
+        ],
+        'dates.date1'    => [
+            'required' => 'La fecha secundaria del evento es obligatoria',
+        ],
+        'dates.time1'    => [
+            'required' => 'La hora del evento es obligatoria',
+        ],
+        'address_2'    => [
+            'required' => 'La dirección secundaria es obligatoria',
+        ],
     ],
 
     /*

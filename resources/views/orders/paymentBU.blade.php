@@ -10,7 +10,7 @@
             <div class=" grid grid-cols-2 gap-6 text-gray-700">
                 <div>
                     <p class="text-lg font-semibold uppercase">Envío</p>
-                    @if ($order->envio_type == 1)
+                    @if ($order->delivery_type == 1)
                         <p class="text-sm">Los productos deben ser recogidos en tienda</p>
                         <p class="text-sm">Calle número XX</p>
                     @else

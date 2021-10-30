@@ -56,7 +56,7 @@
                         </x-jet-dropdown-link>
 
                         <x-jet-dropdown-link href="{{ route('orders.index') }}">
-                            Mis ordenes
+                            Mis reservas
                         </x-jet-dropdown-link>
 
                         @role('admin')
@@ -78,7 +78,7 @@
                             @csrf
 
                             <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                    this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-jet-dropdown-link>
                         </form>
@@ -106,9 +106,9 @@
             @endauth
         </div>
 
-        <div class="hidden md:block">
+        {{-- <div class="hidden md:block">
             @livewire('dropdown-cart')
-        </div>
+        </div> --}}
 
     </div>
 
@@ -165,8 +165,6 @@
 
             <p class="text-trueGray-500 px-6 my-2">USUARIOS</p>
 
-            @livewire('cart-mobil')
-
             @auth
                 <a href="{{ route('profile.show') }}"
                     class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
@@ -174,10 +172,32 @@
                     <span class="flex justify-center w-9">
                         <i class="far fa-address-card"></i>
                     </span>
-                    Perfiles
+                    Perfil
                 </a>
+                <a href="{{ route('orders.index') }}"
+                    class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
+
+                    <span class="flex justify-center w-9">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                    <span class="relative inline-block pr-4">
+                        Mis reservas
+                    </span>
+                </a>
+                @role('admin')
+                    <a href="{{ route('admin.index') }}"
+                        class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
+
+                        <span class="flex justify-center w-9">
+                            <i class="fas fa-shopping-cart"></i>
+                        </span>
+                        <span class="relative inline-block pr-4">
+                            Administrar
+                        </span>
+                    </a>
+                @endrole
                 <a href="" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit() "
+                                    document.getElementById('logout-form').submit() "
                     class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
 
                     <span class="flex justify-center w-9">

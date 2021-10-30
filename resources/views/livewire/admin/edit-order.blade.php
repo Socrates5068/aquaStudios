@@ -6,9 +6,9 @@
                 Orden-{{ $order->id }}</p>
         </div>
 
-        {{-- <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
+        <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
             <p class="text-gray-700 uppercase"><span class="font-semibold">Actualizar estado</span></p>
-        </div> --}}
+        </div>
 
         @if ($order->status != 7)
             <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 items-center lg:flex md:flex">
@@ -20,7 +20,7 @@
                         wire:click="updateState({{"1"}})"></i>
                     </div>
 
-                    <div class="sm:absolute -left-3 mt-0.5">
+                    <div class="sm:absolute -left-2 mt-0.5">
                         <p class="text-sm">Pendiente</p>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
             </div>
             <div class="grid justify-items-stretch">
                 <div class="justify-self-end">
-                    <x-button-enlace color="blue" class="justify-self-end" href="{{ $whatsApp }}" target="_blank">
+                    <x-button-enlace color="blue" class="text-center" href="{{ $whatsApp }}" target="_blank">
                         notificar al usuario por WhatApp
                     </x-button-enlace>
                 </div>
@@ -120,15 +120,15 @@
             </div>
             <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 items-center lg:flex md:flex">
 
-                <div class="relative">
+                <div class="md:relative">
                     <div
                         class="bg-red-400 rounded-full h-12 w-12 flex items-center justify-center">
                         <i class="fas fa-hourglass-end text-white cursor-pointer"
                         wire:click="updateState({{"1"}})"></i>
                     </div>
 
-                    <div class="sm:absolute -left-3 mt-0.5">
-                        <p class="text-sm">Pendiente</p>
+                    <div class="sm:absolute -left-2 mt-0.5">
+                        <p class="text-sm line-through">Pendiente</p>
                     </div>
                 </div>
 
@@ -208,18 +208,19 @@
             </div>
             <div class="grid justify-items-stretch">
                 <div class="justify-self-end">
-                    <x-button-enlace color="red" class="justify-self-end" href="{{ $whatsApp }}" target="_blank">
+                    <x-button-enlace color="red" class="text-center" href="{{ $whatsApp }}" target="_blank">
                         notificar al usuario por WhatApp
                     </x-button-enlace>
                 </div>
             </div>
         @endif        
 
+        {{-- details of delivery --}}
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid grid-cols-2 gap-6 text-gray-700">
                 <div>
                     <p class="text-lg font-semibold uppercase">Envío</p>
-                    @if ($order->envio_type == 1)
+                    @if ($order->delivery_type == 1)
                         <p class="text-sm">Los productos deben ser recogidos en tienda</p>
                         <p class="text-sm">Calle número XX</p>
                     @else
@@ -235,6 +236,7 @@
             </div>
         </div>
 
+        {{-- Summary of order --}}
         <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
             <p class="text-xl font-semibold mb-4">Resumen</p>
             <table class="table-auto w-full">
@@ -245,33 +247,34 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($items as $key => $item)
-                        <tr>
-                            <td>
-                                <div class="flex">
-                                    <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}"
-                                        alt="">
-                                    <article>
-                                        <h1 class="font-bold">{{ $item->name }}</h1>
-                                    </article>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                {{ $item->price }} BOB
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>
+                            <div class="flex">
+                                <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($order->service->image) }}"
+                                    alt="">
+                                <article>
+                                    <h1 class="font-bold">{{ $order->service->name }}</h1>
+                                </article>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            {{ $order->total }} BOB
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
+        {{-- Upload images of the event --}}
         <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6" wire:ignore>
+            <p class="text-xl font-semibold mb-4">Subir imagenes del evento</p>
             <form action="{{ route('admin.orders.images', $order) }}" 
                 method="POST" 
                 class="dropzone"
                 id="my-awesome-dropzone"></form>
         </div>
 
+        {{-- Show uploaded images --}}
         @if($order->photos->count())
             <section class="bg-white shadow-xl rounded-lg p-6 mt-4">
                 <h1 class="uppercase text-center font-semibold mb-2">Imagenes del evento</h1>
@@ -293,12 +296,22 @@
             </section>
         @endif
 
-        @if($order->photos->count())
+        {{-- Images selected by user --}}
+        @php
+            $con = 0;
+            foreach ($order->photos as $item) {
+                if ($item->status == 2) {
+                    $con++;
+                }
+            }
+        @endphp
+        @if ($con != 0)
         <section class="bg-white shadow-xl rounded-lg p-6 mt-4">
             <h1 class="uppercase text-center font-semibold mb-2">Imagenes seleccionadas por el usuario</h1>
             <div class="grid justify-items-stretch px-6 py-4">
                 <div class="justify-self-end">
                     <x-button-enlace color="blue" class="justify-self-end" href="{{ route('admin.orders.photos', $order) }}">
+                        <svg class="fill-current w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                         Descargar fotos
                     </x-button-enlace>
                 </div>

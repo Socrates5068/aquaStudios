@@ -11,6 +11,7 @@ use App\Http\Livewire\Admin\CreateService;
 use App\Http\Livewire\Admin\UserComponent;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Livewire\Admin\ScheduleDelete;
 
 /* Admin services */
 Route::get('/', ShowProducts::class)->name('admin.index');
@@ -32,3 +33,4 @@ Route::get('users', UserComponent::class)->name('admin.users.index');
 
 /* Schedule */
 Route::get('schedule', Schedule::class)->name('admin.schedule');
+Route::get('schedule/delete/', ScheduleDelete::class)->name('admin.schedule.delete');

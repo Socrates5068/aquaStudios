@@ -28,13 +28,13 @@ class UserComponent extends Component
 
     public function render()
     {
-        $users = User::where('email', '<>', auth()->user()->email)
+        $users = User::where('email', '<>', auth()->user()->email)->orderBy('id','ASC')
                     ->where(function($query){
                         $query->where('name', 'LIKE', '%' . $this->search . '%');
                         $query->orWhere('email', 'LIKE', '%' . $this->search . '%');
-                    })
-                    
+                    })                    
                     ->paginate();
+                    //orderBy('fecha_recarga','DESC');
         return view('livewire.admin.user-component', compact('users'))->layout('layouts.admin');
     }
 }

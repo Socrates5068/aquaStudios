@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('name', 60);
             $table->string('image', 60);
-            $table->string('description');
+            $table->text('description', 2000);
             $table->float('price');
             $table->enum('status', [Service::DRAFT, Service::POST])->default(Service::DRAFT);
             $table->unsignedBigInteger('category_id');

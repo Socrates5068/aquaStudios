@@ -26,8 +26,8 @@ class CreateCategory extends Component
     ];
 
     protected $rules =[
-        'createForm.name' => 'required',
-        'createForm.icon' => 'required'
+        'createForm.name' => 'required|max:30',
+        'createForm.icon' => 'required|max:60'
         //'createForm.icon' => 'required|image|max:1024'
     ];
 
@@ -78,8 +78,8 @@ class CreateCategory extends Component
     public function update()
     {
         $this->validate([
-            'editForm.name' => 'required',
-            'editForm.icon' => 'required'
+            'editForm.name' => 'required|max:30',
+            'editForm.icon' => 'required|max:60'
         ]);
 
         $this->category->update($this->editForm);

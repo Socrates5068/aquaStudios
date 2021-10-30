@@ -11,7 +11,7 @@
             </span>
         </x-slot>
 
-        <x-slot name="content">
+        {{-- <x-slot name="content">
 
             <ul>
                 @forelse (Cart::content() as $item)
@@ -32,16 +32,7 @@
                 @endforelse
             </ul>
 
-            @if(Cart::count())
-                <div class="py-2 px-3">
-                        <p class="text-lg  text-gray-700 mt-2 mb-3"> <span class="font-bold">Total:</span>  USD {{ Cart::subtotal() }}</p>
-                        <x-button-enlace href=" {{route('shopping-cart')}} " class="w-full">
-                            Ir al carrito de compras
-                        </x-button-enlace>
-                </div>
-            @endif
-
             
-        </x-slot>
+        </x-slot> --}}
     </x-jet-dropdown>
 </div>
