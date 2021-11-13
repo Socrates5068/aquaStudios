@@ -3,24 +3,26 @@
         @if ($service->status == 1)
             <div class="bg-red-600 rounded-lg shadow-lg px-6 py-4 mb-6 items-center">
                 <p class="text-center text-lg text-white font-bold uppercase cursor-pointer"
-                wire:click="updateState({{2}})">
+                    wire:click="updateState({{ 2 }})">
                     Servicio dado de baja
                 </p>
-                
+
             </div>
         @else
             <div class="bg-green-500 rounded-lg shadow-lg px-6 py-4 mb-6 items-center">
                 <p class="text-center text-lg text-white font-bold uppercase cursor-pointer"
-                    wire:click="updateState({{1}})">
+                    wire:click="updateState({{ 1 }})">
                     Servicio dado de alta
                 </p>
             </div>
         @endif
+
         <div class="flex items-center">
             <h1 class="text-3xl text-center font-semibold mb-8">
                 Actualizar servicio
             </h1>
         </div>
+
         <div class="bg-white shadow-xl rounded-lg p-6">
             <div class="mb-4">
                 <x-jet-label value="Categorias" />
@@ -38,6 +40,16 @@
                 <x-jet-input class="w-full" type="text" wire:model="service.name"
                     placeholder="Ingrese el nombre del servicio" />
                 <x-jet-input-error for="service.name" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Imagen actual" />
+                <img src="{{ Storage::url($service->image) }}" class="w-96">
+
+                <x-jet-label value="Seleccionar otra imagen" class="mt-3"/>
+                <x-jet-input class="w-full" type="file" wire:model="image"
+                    placeholder="Seleccione una otra" accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp"/>
+                <x-jet-input-error for="image" />
             </div>
 
             <div class="mb-4">
@@ -75,8 +87,5 @@
                 </x-jet-button>
             </div>
         </div>
-
-
     </div>
-
 </div>

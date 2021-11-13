@@ -2,37 +2,23 @@ const { map, result } = require("lodash");
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    if(document.querySelector('#mapa2')){
-        const lat = -19.589242065828227;
-        const lng = -65.75317989371399;
-        
-        const mapa2 = L.map('mapa2').setView([lat, lng], 17).invalidateSize();
-        
+    if(document.querySelector('#show_mapa2')){
+        const lat = document.querySelector('#edit_lat2').value;
+        const lng = document.querySelector('#edit_lng2').value;
+    
+        const show_mapa2 = L.map('show_mapa2').setView([lat, lng], 16);
+    
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(mapa2);
-
-        let size = document.getElementById("size");
-        size.onclick = badSize2;
-        
-        /* let mapa = document.getElementById("mapa2");
-        mapa.onmouseover = badSize; */
-        
-        function badSize() {
-            mapa2.invalidateSize()           
-        }
-
-        function badSize2() {
-            setTimeout(badSize,500);    
-        }
-        
+        }).addTo(show_mapa2);
+    
         let marker;
     
         // agregar el pin
         marker = new L.marker([lat, lng], {
-            draggable: true,
+            draggable: false,
             autoPan: true
-        }).addTo(mapa2);
+        }).addTo(show_mapa2);
 
         //Geocode service
         const geocodeService = L.esri.Geocoding.geocodeService({
@@ -45,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const position = marker.getLatLng();
 
             //center map
-            mapa2.panTo( new L.LatLng(position.lat, position.lng));
+            show_mapa2.panTo( new L.LatLng(position.lat, position.lng));
 
             //Reverse Geocoding, where pin is placed
             geocodeService.reverse().latlng(position, 17).run(function(error, result) {
@@ -53,14 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 marker.bindPopup(result.address.Match_addr);
                 marker.openPopup();
                 fillInputs(result);
-                badSize();
             })
         });
-        
+       
         function fillInputs (result) {
-            //console.log(result)
+            /* console.log(result) */
+            /* document.querySelector('#address').value = result.address.Address || ''; */
+            /* document.querySelector('#lat').value = result.latlng.lat || '';
+            document.querySelector('#lng').value = result.latlng.lng || ''; */
 
-            Livewire.emit('getLatitudeForInput2', result.latlng.lat, result.latlng.lng);
+            Livewire.emit('getLatitudeFromInput', result.latlng.lat, result.latlng.lng);
         }
     }
 });

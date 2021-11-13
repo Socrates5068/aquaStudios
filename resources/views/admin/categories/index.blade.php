@@ -20,7 +20,7 @@
                         Livewire.emitTo('admin.create-category', 'delete', categoryId)
                         Swal.fire(
                             '¡Eliminado!',
-                            'El registro a sido eliminado.',
+                            'La categoría a sido eliminada.',
                             'success'
                         )
                     }

@@ -15,6 +15,10 @@ class EditOrder extends Component
     public $order, $status;
     public $whatsApp, $message;
 
+    /* Map */
+    public $coordinates = [];
+    public $addresses = 0;
+
     public $user;
     public $toMail = [
         'message' => 'default',
@@ -39,25 +43,25 @@ class EditOrder extends Component
 
         switch ($order->status) {
             case '1':
-                $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva aún se encuentra en proceso de verificación, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '2':
-                $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su pago a sido verificado, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '3':
-                $this->message = "Su orden a cambiado al estado EN EDICIÖN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado EN EDICIÖN, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '4':
-                $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado TERMINADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '5':
-                $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ENVIADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '6':
-                $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ENTREGADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             case '7':
-                $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ANULADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 break;
             default:
                 $this->message = "hola";
@@ -65,6 +69,16 @@ class EditOrder extends Component
         }
 
         $this->whatsApp = $apiWhatsApp . $phone . '&text=' . $this->message;
+
+        foreach ($order->addresses as $address) {
+            array_push($this->coordinates, $address->lat);
+            array_push($this->coordinates, $address->lng);
+        }
+        
+        if (isset($this->coordinates[2])) {
+            $this->addresses = 1;
+        }
+
     }
 
     public function save()
@@ -75,7 +89,7 @@ class EditOrder extends Component
         $this->order->save();
         $this->emit('saved');
     }
-
+    
     public function updateState($state)
     {
         /*         $rules = $this->rules;
@@ -83,6 +97,8 @@ class EditOrder extends Component
 
         $this->order->status = $state;
         $this->order->save();
+        
+        $this->render();
 
         /* WhatsApp notify */
         $apiWhatsApp = "https://api.whatsapp.com/send?phone=";
@@ -90,57 +106,57 @@ class EditOrder extends Component
 
         switch ($this->order->status) {
             case '1':
-                $this->message = "Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva aún se encuentra en proceso de verificación, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden aún se encuentra en proceso de verificación, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva aún se encuentra en proceso de verificación, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '2':
-                $this->message = "Su pago a sido verificado, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su pago a sido verificado, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su pago a sido verificado, puede ver el estado de su orden en el siguente enlace',
-                    'id' => $this->order->uid
+                    'message' => 'Su pago a sido verificado, puede ver el estado de su reserva en el siguente enlace',
+                    'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '3':
-                $this->message = "Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado EN EDICIÓN, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden a cambiado al estado EN EDICIÓN, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva a cambiado al estado EN EDICIÓN, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '4':
-                $this->message = "Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado TERMINADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden a cambiado al estado TERMINADO, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva a cambiado al estado TERMINADO, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '5':
-                $this->message = "Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ENVIADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden a cambiado al estado ENVIADO, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva a cambiado al estado ENVIADO, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '6':
-                $this->message = "Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ENTREGADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden a cambiado al estado ENTREGADO, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva a cambiado al estado ENTREGADO, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
                 break;
             case '7':
-                $this->message = "Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en http://aquastudios.test/orders/" . $this->order->id;
+                $this->message = "Su reserva a cambiado al estado ANULADO, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
                 $this->toMail = [
-                    'message' => 'Su orden a cambiado al estado ANULADO, puede ver el estado de su orden en el siguente enlace',
+                    'message' => 'Su reserva a cambiado al estado ANULADO, puede ver el estado de su reserva en el siguente enlace',
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
@@ -169,6 +185,7 @@ class EditOrder extends Component
     {
         /* $items = json_decode($this->order->content);
         return view('livewire.admin.edit-order', compact('items'))->layout('layouts.admin'); */
-        return view('livewire.admin.edit-order')->layout('layouts.admin');
+        $service = json_decode($this->order->service);
+        return view('livewire.admin.edit-order', compact('service'))->layout('layouts.admin');
     }
 }

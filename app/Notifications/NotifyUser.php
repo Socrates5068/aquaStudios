@@ -44,7 +44,7 @@ class NotifyUser extends Notification
         return (new MailMessage)
                     ->subject('Actualización de estado')
                     ->line($this->data->message)
-                    ->action('Ver estado de mi orden', 'http://aquastudios.test/orders/' . $this->data->id)
+                    ->action('Ver estado de mi reserva', 'http://aquastudios.test/orders/' . $this->data->id)
                     ->line('¡Gracias por usar nuestros servicios!');
     }
 

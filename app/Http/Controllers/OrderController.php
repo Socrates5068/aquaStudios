@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Photo;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,16 +17,14 @@ class OrderController extends Controller
 
     public function payment(Order $order){
 
-        $items = json_decode($order->content);
-
-        return view('orders.payment', compact('order', 'items'));
+        return view('orders.payment', compact('order'));
     }
 
     public function show (Order $order){
         $this->authorize('author', $order);
 
-        $items = json_decode($order->content);
+        $service = json_decode($order->service);
 
-        return view('orders.show', compact('order', 'items'));
+        return view('orders.show', compact('order', 'service'));
     }
 }

@@ -63,7 +63,7 @@
 
         {{-- Delivery options --}}
         <div x-data="{delivery_type: @entangle('delivery_type')}" class="mb-4">
-            <p class="mb-3 text-lg text-gray-700 font-semibold uppercase">Envio</p>
+            <p class="mt-4 md:mt-0 mb-3 text-lg text-gray-700 font-semibold uppercase">Envio</p>
 
             <label class="bg-white rounded-lg shadow px-6 py-4 flex items-center mb-4 cursor-pointer">
                 <input x-model="delivery_type" type="radio" value="1" name="delivery_type" class="text-gray-600">

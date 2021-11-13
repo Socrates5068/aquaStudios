@@ -16,8 +16,8 @@ class Date extends Model
         return $this->belongsTo(Order::class);
     }
     
-    public function service()
+    /* public function service()
     {
         return $this->hasOneThrough(Service::class, Order::class, 'id', 'id', 'order_id', 'service_id');
-    }
+    } */
 }

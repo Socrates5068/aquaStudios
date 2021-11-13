@@ -27,7 +27,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function dates(){
+    public function datess(){
         return $this->hasMany(Date::class);
     }
 
@@ -37,9 +37,5 @@ class Order extends Model
 
     public function addresses(){
         return $this->hasMany(Address::class);
-    }
-
-    public function service(){
-        return $this->belongsTo(Service::class);
     }
 }

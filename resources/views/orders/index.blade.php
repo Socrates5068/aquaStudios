@@ -40,7 +40,7 @@
                                 </span>
 
                                 <span>
-                                    Orden: {{$order->id}}
+                                    Reserva: {{$order->id}}
                                     <br>
                                     {{$order->created_at->format('d/m/Y')}}
                                 </span>
@@ -95,7 +95,7 @@
         @else
         <div class="bg-white shadow-lg rounded-lg px-12 py-8 mt-12 text-gray-700">
             <span class="font-bold text-lg">
-                No existe registros de ordenes
+                No existe registros de reservaes
             </span>
         </div>
         @endif

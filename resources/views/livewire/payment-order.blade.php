@@ -5,17 +5,19 @@
             <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
                 <p class="text-gray-700 uppercase">
                     <span class="font-semibold">
-                        Número de Orden-{{ $order->id }}
+                        Número de Reserva-{{ $order->id }}
                 </p>
                 </span>
             </div>
+
+            {{--Summary order --}}
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                 <div class=" grid grid-cols-2 gap-6 text-gray-700">
                     <div>
                         <p class="text-lg font-semibold uppercase">Envío</p>
                         @if ($order->delivery_type == 1)
                             <p class="text-sm">Los productos deben ser recogidos en tienda</p>
-                            <p class="text-sm">Calle número XX</p>
+                            <p class="text-sm">Heroes del chaco 22</p>
                         @else
                             <p class="text-sm">Los productos serán enviados a </p>
                             <p class="text-sm">{{ $order->d_address }}</p>
@@ -23,12 +25,13 @@
                     </div>
                     <div>
                         <p class="text-lg font-semibold uppercase">Datos de contacto</p>
-                        <p class="text-sm">Persona que recivirá el producto: {{ $order->name_contact }}</p>
+                        <p class="text-sm">Persona encargada del evento: {{ $order->name_contact }}</p>
                         <p class="text-sm">Teléfono de contacto: {{ $order->phone_contact }}</p>
                     </div>
                 </div>
             </div>
 
+            {{-- Summary service --}}
             <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
                 <p class="text-xl font-semibold mb-4">Resumen</p>
                 <table class="table-auto w-full">
@@ -42,23 +45,26 @@
                         <tr>
                             <td>
                                 <div class="flex">
-                                    <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($order->service->image) }}" alt="">
+                                    <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($service->image) }}" alt="">
                                     <article>
-                                        <h1 class="font-bold">{{ $order->service->name }}</h1>
+                                        <h1 class="font-bold">{{ $service->name }}</h1>
                                     </article>
                                 </div>
                             </td>
                             <td class="text-center">
-                                {{ $order->service->price }} BOB
+                                {{ $service->price }} BOB
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <p class="mt-4 text-xl font-semibold mb-4">Detalles del servicio</p>
+                {!! $service->description !!}
             </div>
-
+        
 
         </div>
 
+        {{-- Button Paypal --}}
         <div class="order-1 lg:order-2 xl:col-span-2 ">
             <div class="bg-white rounded-lg shadow-lg px-6 pt-6">
                 <div class="flex justify-between items-center mb-4">

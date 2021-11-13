@@ -156,7 +156,7 @@ class CreateOrder extends Component
         $address = new Address();
         if ($this->delivery_type == 1) {
             $order->user_id = auth()->user()->id;
-            $order->service_id = $this->service->id;
+            $order->service = json_encode($this->service);
             $order->delivery_type = $this->delivery_type;
             $order->shipping_cost = 0;
             $order->total = $this->service->price;
@@ -187,7 +187,7 @@ class CreateOrder extends Component
 
         } else {
             $order->user_id = auth()->user()->id;
-            $order->service_id = $this->service->id;
+            $order->service = json_encode($this->service);
             $order->delivery_type = $this->delivery_type;
             $order->shipping_cost = $this->shipping_cost;
             $order->total = $this->service->price + $this->shipping_cost;

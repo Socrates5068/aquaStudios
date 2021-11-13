@@ -85,6 +85,8 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('admin.services.edit', $service) }}"
                                         class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                    <a class="px-2 pl-2 hover:text-red-600 cursor-pointer"
+                                        wire:click="$emit('deleteService', {{$service}} )">Eliminar</a>
                                 </td>
                             </tr>
 
@@ -107,5 +109,32 @@
         </x-table-responsive>
 
     </div>
+
+    @push('script')
+        <script>
+            Livewire.on('deleteService', service=> {
+            
+                Swal.fire({
+                    title: '¿Está seguro?',
+                    text: "¡No podrá revertir está acción!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '¡Sí, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //Livewire.emitTo('admin.create-category', 'delete', categoryId)
+                        Livewire.emit('delete', service)
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El servicio a sido eliminado.',
+                            'success'
+                        )
+                    }
+                })
+            });
+        </script>
+    @endpush
 
 </div>

@@ -6,7 +6,7 @@
             <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
                 <p class="text-gray-700 uppercase">
                     <span class="font-semibold">
-                        Número de Orden-{{$order->id}}</p>
+                        Número de Reserva-{{$order->id}}</p>
                     </span>
             </div>
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">

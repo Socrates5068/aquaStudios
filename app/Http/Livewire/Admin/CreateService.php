@@ -5,15 +5,21 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Category;
 use App\Models\Service;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class CreateService extends Component
 {
+    use WithFileUploads;
+
     public $categories;
+    public $image;
     public $name, $description, $price;    
     public $category_id = "";
     protected $rules = [
         'category_id' => 'required',
         'name' => 'required|max:60',
+        'image' => 'image|max:4096',
         'description' => 'required|max:2000',
         'price' => 'required|numeric'
     ];
@@ -27,10 +33,12 @@ class CreateService extends Component
         $rules = $this->rules;
         $this->validate($rules);
 
+        $url_image = Storage::put('services', $this->image);
+
         $service = new Service();
         
         $service->name = $this->name;
-        $service->image = "image";
+        $service->image = $url_image;
         $service->description = $this->description;
         $service->price = $this->price;
         $service->category_id = $this->category_id;

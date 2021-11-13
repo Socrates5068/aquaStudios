@@ -6,14 +6,15 @@ use App\Http\Livewire\CreateOrder;
 use PHPUnit\Framework\Reorderable;
 use App\Http\Livewire\PaymentOrder;
 use App\Http\Livewire\ShoppingCart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\EditReservation;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PhotoController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('orders/create/{service}', CreateOrder::class)->name('orders.create');
     
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/edit/{order}', EditReservation::class)->name('edit.order');
     Route::get('photos/{order}', ShowPhotos::class)->name('photos');
     
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');

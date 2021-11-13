@@ -24,6 +24,7 @@ Route::get('categories', [CategoryController::class, 'index'])->name('admin.cate
 /* Admin orders */
 Route::get('orders', ShowOrders::class)->name('admin.orders');
 Route::get('orders/{order}/edit', EditOrder::class)->name('admin.orders.edit');
+
 /* Images */
 Route::post('orders/{order}/images', [OrderController::class, 'images'])->name('admin.orders.images');
 Route::get('orders/{order}/photos', [OrderController::class, 'photos'])->name('admin.orders.photos');
