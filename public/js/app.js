@@ -4967,6 +4967,8 @@ __webpack_require__(/*! ./showMap */ "./resources/js/showMap.js");
 
 __webpack_require__(/*! ./showMap2 */ "./resources/js/showMap2.js");
 
+__webpack_require__(/*! ./mapContact */ "./resources/js/mapContact.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__.default;
 alpinejs__WEBPACK_IMPORTED_MODULE_0__.default.start();
@@ -5040,14 +5042,14 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelector('#delete')) {
     var deleteDate = function deleteDate(dateJs) {
-      Livewire.emit('deleteDate', dateJs);
+      Livewire.emit('deleteDate', id);
     };
 
-    var dateJs = document.getElementById('deleteDate').innerHTML;
+    var id = document.getElementById('deleteDate').innerHTML;
     var button = document.getElementById("buttonDelete");
 
     button.onclick = function () {
-      deleteDate(dateJs);
+      deleteDate(id);
     };
   }
 });
@@ -5162,6 +5164,36 @@ document.addEventListener('DOMContentLoaded', function () {
         marker.openPopup();
         fillInputs(result);
       });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mapContact.js":
+/*!************************************!*\
+  !*** ./resources/js/mapContact.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    map = _require.map,
+    result = _require.result;
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.querySelector('#contact_map')) {
+    //let contact_map = L.map('contact_map').fitWorld();
+    var contact_map = L.map('contact_map').setView([-19.586999942356, -65.755079903526], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(contact_map);
+    marker = new L.marker([-19.586999942356, -65.755079903526], {
+      draggable: false,
+      autoPan: true
+    }).addTo(contact_map); //Geocode service
+
+    var geocodeService = L.esri.Geocoding.geocodeService({
+      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
     });
   }
 });

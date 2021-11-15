@@ -144,7 +144,7 @@
 
 
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
-            <p class="text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
+            <p class="text-sm md:text-base text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
                 Reserva-{{ $order->id }}</p>
         </div>
 
@@ -172,18 +172,35 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-bold uppercase">Envío</p>
+                    <p class="text-sm md:text-base font-bold uppercase">Envío</p>
                     @if ($order->delivery_type == 1)
-                        <p class="text-sm">Esta reserva debe ser recogida en tienda.</p>
+                        <p class="text-sm md:text-base">Esta reserva debe ser recogida en tienda.</p>
                     @else
-                        <p class="text-sm">Los productos serán enviados a </p>
-                        <p class="text-sm">{{ $order->d_address }}</p>
+                        <p class="text-sm md:text-base">Los productos serán enviados a </p>
+                        <p class="text-sm md:text-base">{{ $order->d_address }}</p>
                     @endif
                 </div>
+            </div>
+        </div>
+
+        {{-- Event information --}}
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
+            <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-bold uppercase">Datos de contacto del evento</p>
-                    <p class="md:text-sm">Persona encargada del evento: {{ $order->name_contact }}</p>
-                    <p class="md:text-sm">Teléfono de contacto: {{ $order->phone_contact }}</p>
+                    <p class="text-sm md:text-base font-bold uppercase">Datos de contacto del evento</p>
+
+                    <p class="text-sm md:text-base font-semibold">Persona encargada del evento: </p>
+                    <p class="text-sm md:text-base">{{ $order->name_contact }}</p>
+                    <p class="text-sm md:text-base font-semibold mt-4">Teléfono de contacto:</p>
+                    <p class="text-sm md:text-base">{{ $order->phone_contact }}</p>
+                </div>
+                <div>
+                    <p class="text-sm md:text-base font-bold uppercase">Invitación</p>
+                    <div class="">
+                        @if ($order->invitation)
+                            <img src="{{ Storage::url($order->invitation) }}">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,13 +215,13 @@
                     @foreach ($order->addresses as $address)
 
                         @if ($con === 1)
-                            <p class="mt-3 md:text-sm font-bold uppercase">Dirección principal del evento:</p>
+                            <p class="mt-3 text-sm md:text-base font-bold uppercase">Dirección principal del evento:</p>
                             {{ $address->address }}
                             @php
                                 $con++;
                             @endphp
                         @else
-                            <p class="mt-6 md:text-sm font-bold uppercase">Dirección secundaria del evento:</p>
+                            <p class="mt-6 text-sm md:text-base font-bold uppercase">Dirección secundaria del evento:</p>
                             {{ $address->address }}
                         @endif
                     @endforeach
@@ -215,13 +232,13 @@
                             <tr
                                 class="text-right bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                                 <td
-                                    class="w-full lg:w-auto p-3 text-gray-800 border border-b block lg:table-cell relative lg:static">
+                                    class="w-full lg:w-auto p-3 text-gray-800  border-b block lg:table-cell relative lg:static">
                                     <span
                                         class="lg:relative absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">fecha</span>
                                     <input type="date" value="{{ $date->date }}">
                                 </td>
                                 <td
-                                    class="w-full lg:w-auto p-3 text-gray-800 border border-b block lg:table-cell relative lg:static">
+                                    class="w-full lg:w-auto p-3 text-gray-800  border-b block lg:table-cell relative lg:static">
                                     <span
                                         class="absolute lg:relative  top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">hora</span>
                                     {{ $date->time }}
@@ -258,9 +275,6 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-semibold uppercase">Dirección principal</p>
-                    <x-jet-input class="w-full" value="{{ $edit_address1 }}" type="text" />
-
                     {{-- Map address 1 --}}
                     <div class="mt-2 mb-6">
                         <div id='show_mapa1' class="h-80 mb-2"></div>
@@ -270,9 +284,6 @@
                 </div>
                 @if ($edit_address2)
                     <div>
-                        <p class="font-semibold uppercase">Dirección secundaria</p>
-                        <x-jet-input class="w-full" value="{{ $edit_address2 }}" type="text" />
-
                         {{-- Map address 2 --}}
                         <div class="mt-2 mb-6">
                             <div id='show_mapa2' class="h-80 mb-2"></div>
@@ -281,6 +292,16 @@
                         </div>
                     </div>
                 @endif
+            </div>
+        </div>
+
+        {{-- Comment --}}
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
+            <div class="flex mb-2">
+                <p class="text-sm md:text-base font-semibold uppercase">Comentario adicional sobre el evento</p>
+            </div>
+            <div wire:ignore>
+                <textarea class="w-full form-control" rows="4" readonly>{{$order->comment}}</textarea>
             </div>
         </div>
 

@@ -60,7 +60,8 @@ class CreateOrder extends Component
 
     protected $listeners = [
         'getLatitudeForInput',
-        'getLatitudeForInput2'
+        'getLatitudeForInput2', 
+        'create_order'
     ];
 
     public function mount(Service $service)

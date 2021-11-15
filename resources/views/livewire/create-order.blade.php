@@ -14,13 +14,13 @@
                     <li class="flex p-2 border-b border-gray-200">
                         <img class="h-15 w-20 object-center mr-4" src="{{ Storage::url($service->image) }}" alt="">
                         <article class="flex-1">
-                            <h1 class="font-bold">{{ $service->name }}</h1>
-                            <p>USD: {{ $service->price }}</p>
+                            <h1 class="text-sm md:text-base font-bold">{{ $service->name }}</h1>
+                            <p class="text-sm md:text-base">USD: {{ $service->price }}</p>
                         </article>
                     </li>
                 @else
                     <li class="py-6 px-4">
-                        <p class="text-center text-gray-700">
+                        <p class="text-sm md:text-base text-center text-gray-700">
                             No tiene agregado ningún itemen el carrito
                         </p>
                     </li>
@@ -35,7 +35,7 @@
 
             <hr class="mt-4 mb-3">
             <div class="text-gray-700">
-                <p class=" flex justify-between items-center">
+                <p class="text-sm md:text-base flex justify-between items-center">
                     Envio
                     <span class="font-semibold">
                         @if ($delivery_type == 1)
@@ -63,18 +63,18 @@
 
         {{-- Delivery options --}}
         <div x-data="{delivery_type: @entangle('delivery_type')}" class="mb-4">
-            <p class="mt-4 md:mt-0 mb-3 text-lg text-gray-700 font-semibold uppercase">Envio</p>
+            <p class="mt-4 text-sm md:text-basemt-4 md:mt-0 mb-3 text-gray-700 font-semibold uppercase">Envio</p>
 
             <label class="bg-white rounded-lg shadow px-6 py-4 flex items-center mb-4 cursor-pointer">
                 <input x-model="delivery_type" type="radio" value="1" name="delivery_type" class="text-gray-600">
-                <span class="ml-2 text-gray-700">Recoger en tienda</span>
-                <span class="font-semibold text-gray-700 ml-auto">Gratis</span>
+                <span class="text-sm md:text-base ml-2 text-gray-700">Recoger en tienda</span>
+                <span class="text-sm md:text-base font-semibold text-gray-700 ml-auto">Gratis</span>
             </label>
 
             <div class="bg-white rounded-lg shadow">
                 <label class="px-6 py-4 flex items-center cursor-pointer">
                     <input x-model="delivery_type" type="radio" value="2" name="delivery_type" class="text-gray-600" />
-                    <span class="ml-2 text-gray-700">
+                    <span class="text-sm md:text-base ml-2 text-gray-700">
                         Envío a domicilio
                     </span>
                 </label>
@@ -91,7 +91,7 @@
 
         {{-- information for delivery --}}
         <div class="bg-white rounded-lg shadow p-6">
-            <p class="text-lg text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de contacto</p>
+            <p class="text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de contacto</p>
             <div class="mb-4">
                 <x-jet-label value="Nombre de contacto" />
                 <x-jet-input type="text" wire:model.defer="contact" placeholder="Ingrese el nombre de contacto"
@@ -109,7 +109,7 @@
 
         {{-- Order details --}}
         <div class="bg-white rounded-lg shadow p-6 mt-4">
-            <p class="text-lg text-gray-700 font-semibold uppercase mb-4 -mt-2">Detalles del evento</p>
+            <p class="text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Detalles del evento</p>
 
             {{-- Upload image --}}
             <div class="mb-6">
@@ -178,7 +178,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     
-                        <span class="px-2">
+                        <span class="text-sm md:text-base px-2">
                             {{"Esta fecha ya se encuentra reservada."}}
                         </span>
                     
@@ -236,7 +236,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 
-                                    <span class="px-2" id="scheduleError">
+                                    <span class="text-sm md:text-base px-2" id="scheduleError">
                                         {{"Esta fecha ya se encuentra reservada."}}
                                     </span>
                             
@@ -269,7 +269,7 @@
                 wire:loading.attr="disabled" 
                 wire:target="create_order" 
                 class="mt-6 mb-4"
-                wire:click="create_order">
+                wire:click="$emit('createOrder', 'dodo')">
                 Continuar con la compra
             </x-jet-button>
 
@@ -292,4 +292,23 @@
         crossorigin=""></script>
     <script src="https://unpkg.com/esri-leaflet" defer></script>
     <script src="https://unpkg.com/esri-leaflet-geocoder" defer></script>
+    <script>
+        Livewire.on('createOrder', service => {
+        
+            Swal.fire({
+                title: '¿Está seguro de que los datos son correctos?',
+                text: "¡Las fechas que va a reservar no se pueden modificar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, quiero pagar ya!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //Livewire.emitTo('admin.create-category', 'delete', categoryId)
+                    Livewire.emit('create_order')
+                }
+            })
+        });
+    </script>
 @endpush

@@ -16,7 +16,7 @@
         </div>
 
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
-            <p class="text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
+            <p class="text-sm md:text-base text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
                 Reserva-{{ $order->id }}</p>
         </div>
 
@@ -25,7 +25,7 @@
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
                 <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                     <div>
-                        <p class="font-semibold uppercase">Dirección de entrega</p>
+                        <p class="text-sm md:text-base font-semibold uppercase">Dirección de entrega</p>
                         <div class="mt-5">
                             <x-jet-input class="w-full" wire:model="address" type="text" />
                             <x-jet-input-error for="address" />
@@ -39,7 +39,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-semibold uppercase">Datos de contacto del evento</p>
+                    <p class="text-sm md:text-base font-semibold uppercase">Datos de contacto del evento</p>
 
                     <x-jet-label value="Nombre" />
                     <x-jet-input class="w-full" wire:model="name_contact" type="text" />
@@ -50,7 +50,7 @@
                     <x-jet-input-error for="phone_contact" />
                 </div>
                 <div>
-                    <p class="font-semibold uppercase">Invitación</p>
+                    <p class="text-sm md:text-base font-semibold uppercase">Invitación</p>
                     <div class="">
                         @if ($order->invitation)
                             <x-jet-label value="Imagen actual" />
@@ -68,7 +68,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-semibold uppercase">Dirección principal</p>
+                    <p class="text-sm md:text-base font-semibold uppercase">Dirección principal</p>
                     <x-jet-input class="w-full" wire:model="edit_address1" type="text" />
                     <x-jet-input-error for="edit_address1" />
 
@@ -85,7 +85,7 @@
                 </div>
                 @if ($edit_address2)
                     <div>
-                        <p class="font-semibold uppercase">Dirección secundaria</p>
+                        <p class="text-sm md:text-base font-semibold uppercase">Dirección secundaria</p>
                         <x-jet-input class="w-full" wire:model="edit_address2" type="text" />
                         <x-jet-input-error for="edit_address2" />
 
@@ -107,7 +107,7 @@
         {{-- Comment --}}
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class="flex mb-2">
-                <p class="font-semibold uppercase">Comentario adicional sobre el evento (Opcional)</p>
+                <p class="text-sm md:text-base font-semibold uppercase">Comentario adicional sobre el evento (Opcional)</p>
             </div>
             <div wire:ignore>
                 <textarea class="w-full form-control" rows="4"

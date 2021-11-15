@@ -130,18 +130,39 @@
                                 {{ $category->name }}
                             </a>
 
-                            <div class="navigation-submenu bg-gray-100 absolute h-full w-3/4 top-0 right-0" hidden>
+                            {{-- <div class="navigation-submenu bg-gray-100 absolute h-full w-3/4 top-0 right-0" hidden>
                                 <div class="grid-cols-4">
                                     <p class="text-red-500">{{ $category->name }}</p>
 
                                 </div>
-                            </div>
+                            </div> --}}
                         </li>
                     @endforeach
+                    <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                        <a href="{{ route('who.show') }}"
+                                class="py-2 px-4 text-sm flex items-center">
+
+                                <span class="flex justify-center w-9">
+                                    <i class="fab fa-adn"></i>
+                                </span>
+                                Quienes somos
+                            </a>
+                    </li>
+
+                    <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                        <a href="{{ route('contact') }}"
+                                class="py-2 px-4 text-sm flex items-center">
+
+                                <span class="flex justify-center w-9">
+                                    <i class="fas fa-mail-bulk"></i>
+                                </span>
+                                Contactenos
+                            </a>
+                    </li>
                 </ul>
 
                 <div class="col-span-3 bg-gray-100">
-
+                    <img class="w-full py-4 object-cover object-center" src="{{asset('img/cinta_video.png')}}" alt="">
                 </div>
             </div>
         </div>
@@ -161,6 +182,27 @@
                         </a>
                     </li>
                 @endforeach
+                <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                    <a href="{{ route('who.show') }}"
+                            class="py-2 px-4 text-sm flex items-center">
+
+                            <span class="flex justify-center w-9">
+                                <i class="fab fa-adn"></i>
+                            </span>
+                            Quienes somos
+                        </a>
+                </li>
+
+                <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                    <a href="{{ route('contact') }}"
+                            class="py-2 px-4 text-sm flex items-center">
+
+                            <span class="flex justify-center w-9">
+                                <i class="fas fa-mail-bulk"></i>
+                            </span>
+                            Contactenos
+                        </a>
+                </li>
             </ul>
 
             <p class="text-trueGray-500 px-6 my-2">USUARIOS</p>

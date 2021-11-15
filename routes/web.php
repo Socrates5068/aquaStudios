@@ -15,6 +15,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\Contact;
+use App\Http\Livewire\Who;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +33,12 @@ Route::get('/', WelcomeController::class);
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
+Route::get('quienes-somos/', Who::class)->name('who.show');
+
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::middleware(['auth', 'verified'])->group(function(){
+    
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('photo/{order}', [PhotoController::class, 'photos'])->name('photos.download');
 
@@ -44,4 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('photos/{order}', ShowPhotos::class)->name('photos');
     
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
+
+    Route::get('contactenos/', Contact::class)->name('contact');
 });

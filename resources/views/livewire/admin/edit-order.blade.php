@@ -17,12 +17,12 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
-            <p class="text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
+            <p class="text-sm md:text-base text-gray-700 uppercase"><span class="font-semibold">Número de reserva:</span>
                 Reserva-{{ $order->id }}</p>
         </div>
 
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
-            <p class="text-gray-700 uppercase"><span class="font-semibold">Actualizar estado</span></p>
+            <p class="text-sm md:text-base text-gray-700 uppercase"><span class="font-semibold">Actualizar estado</span></p>
         </div>
 
         {{-- Show order state --}}
@@ -234,18 +234,18 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class=" grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-bold uppercase">Envío</p>
+                    <p class="text-sm md:text-base font-bold uppercase">Envío</p>
                     @if ($order->delivery_type == 1)
-                        <p class="text-sm">Esta reserva debe ser recogida en tienda.</p>
+                        <p class="text-sm md:text-base">Esta reserva debe ser recogida en tienda.</p>
                     @else
-                        <p class="text-sm">Los productos serán enviados a </p>
-                        <p class="text-sm">{{ $order->d_address }}</p>
+                        <p class="text-sm md:text-base">Los productos serán enviados a </p>
+                        <p class="text-sm md:text-base">{{ $order->d_address }}</p>
                     @endif
                 </div>
                 <div>
-                    <p class="font-bold uppercase">Datos de contacto del evento</p>
-                    <p class="md:text-sm">Persona encargada del evento: {{ $order->name_contact }}</p>
-                    <p class="md:text-sm">Teléfono de contacto: {{ $order->phone_contact }}</p>
+                    <p class="text-sm md:text-base font-bold uppercase">Datos de contacto del evento</p>
+                    <p class="text-sm md:text-base">Persona encargada del evento: {{ $order->name_contact }}</p>
+                    <p class="text-sm md:text-base">Teléfono de contacto: {{ $order->phone_contact }}</p>
                 </div>
             </div>
         </div>
@@ -254,14 +254,21 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
             <div class="grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                    <p class="font-bold uppercase">Usuario de esta reserva</p>
-                    <p class="text-sm">Nombre: {{ $order->user->name }}</p>
+                    <p class="text-sm md:text-base font-bold uppercase">Usuario de esta reserva</p>
+                    <p class="text-sm md:text-base ">Nombre: {{ $order->user->name }}</p>
+
+                    <p class="text-sm md:text-base font-bold uppercase mt-4">Datos del usuario</p>
+                    <p class="text-sm md:text-base">Correo: {{ $order->user->email }}</p>
+                    <p class="text-sm md:text-base">Teléfono: {{ $order->user->celphone }}</p>
 
                 </div>
                 <div>
-                    <p class="font-bold uppercase">Datos de contacto</p>
-                    <p class="text-sm">Correo: {{ $order->user->email }}</p>
-                    <p class="text-sm">Teléfono: {{ $order->user->celphone }}</p>
+                    <div class="">
+                        @if ($order->invitation)
+                        <p class="text-sm md:text-base font-bold uppercase">Invitación</p>
+                            <img src="{{ Storage::url($order->invitation) }}">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,13 +283,13 @@
                     @foreach ($order->addresses as $address)
                         
                         @if ($con === 1)
-                            <p class="mt-3 md:text-sm font-bold uppercase">Dirección principal del evento:</p>
+                            <p class="mt-3 text-sm md:text-base font-bold uppercase">Dirección principal del evento:</p>
                             {{ $address->address }}
                             @php
                                 $con++;
                             @endphp
                         @else
-                            <p class="mt-6 md:text-sm font-bold uppercase">Dirección secundaria del evento:</p>
+                            <p class="mt-6 text-sm md:text-base font-bold uppercase">Dirección secundaria del evento:</p>
                             {{ $address->address }}
                         @endif
                     @endforeach
@@ -291,11 +298,11 @@
                     <x-dates-order>
                         @foreach ($order->datess as $date)
                             <tr class="text-right bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                                <td class="w-full lg:w-auto p-3 text-gray-800 border border-b block lg:table-cell relative lg:static">
+                                <td class="w-full lg:w-auto p-3 text-gray-800  border-b block lg:table-cell relative lg:static">
                                     <span class="lg:relative absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">fecha</span>
                                     <input type="date" value="{{ $date->date }}">
                                 </td>
-                                <td class="w-full lg:w-auto p-3 text-gray-800 border border-b block lg:table-cell relative lg:static">
+                                <td class="w-full lg:w-auto p-3 text-gray-800  border-b block lg:table-cell relative lg:static">
                                     <span class="absolute lg:relative  top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">hora</span>
                                     {{ $date->time }}
                                 </td>
@@ -318,15 +325,25 @@
                 <select name="select-location" id="select-location">
                     <option value="-1">Seleccione una ubicación</option>
                     <option value="{{$coordinates[0].','.$coordinates[1]}}"> Dirección principal del evento</option>
-                    <option value="{{$coordinates[2].','.$coordinates[3]}}"> Dirección principal del evento</option>
+                    <option value="{{$coordinates[2].','.$coordinates[3]}}"> Dirección secundaria del evento</option>
                 </select>
                 <div id='mapStatic' class="mt-4 h-80 mb-2" wire:ignore></div>
             @endif
         </div>
 
+        {{-- Comment --}}
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6">
+            <div class="flex mb-2">
+                <p class="text-sm md:text-base font-semibold uppercase">Comentario adicional sobre el evento</p>
+            </div>
+            <div wire:ignore>
+                <textarea class="w-full form-control" rows="4" readonly>{{$order->comment}}</textarea>
+            </div>
+        </div>
+
         {{-- Summary of order --}}
         <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
-            <p class="text-xl font-semibold mb-4">Resumen</p>
+            <p class="text-sm md:text-base font-bold mb-4 uppercase">Resumen</p>
             <table class="table-auto w-full">
                 <thead>
                     <tr>
@@ -356,7 +373,7 @@
 
         {{-- Upload images of the event --}}
         <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6" wire:ignore>
-            <p class="text-xl font-semibold mb-4">Subir imagenes del evento</p>
+            <p class="text-sm md:text-base font-bold mb-4 uppercase">Subir imagenes del evento</p>
             <form action="{{ route('admin.orders.images', $order) }}" method="POST" class="dropzone"
                 id="my-awesome-dropzone"></form>
         </div>
@@ -364,7 +381,7 @@
         {{-- Show uploaded images --}}
         @if ($order->photos->count())
             <section class="bg-white shadow-xl rounded-lg p-6 mt-4">
-                <h1 class="uppercase text-center font-semibold mb-2">Imagenes del evento</h1>
+                <h1 class="text-sm md:text-base uppercase text-center font-semibold mb-2">Imagenes del evento</h1>
                 <ul class="flex flex-wrap">
                     @foreach ($order->photos as $photo)
                         @if ($photo->status == 1)

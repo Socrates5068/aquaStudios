@@ -49,6 +49,12 @@ class Schedule extends Component
         }
 
         $date->save();
+
+        /* Save the id */
+        $date->url = $this->date['event_url'].'&id='.$date->id;
+        $date->save();
+
+        return redirect()->route('admin.schedule');
     }
     
     public function render()

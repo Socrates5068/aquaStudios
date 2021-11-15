@@ -16,9 +16,9 @@ class ScheduleDelete extends Component
         $this->dates = Date::all();
     }
 
-    public function deleteDate($dateJs)
+    public function deleteDate($id)
     {
-        $jsDateToPHP = strtotime($dateJs);
+        /* $jsDateToPHP = strtotime($dateJs);
         $datePHP = date('Y-m-d', $jsDateToPHP);
 
         foreach ($this->dates as $date) {
@@ -26,7 +26,10 @@ class ScheduleDelete extends Component
                 Date::where('date',$datePHP)->delete();
                 break;
             }
-        }
+        } */
+
+        $date = Date::find($id);
+        $date->delete();
 
         return redirect()->route('admin.schedule');
     }

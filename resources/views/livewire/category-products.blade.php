@@ -7,7 +7,7 @@
                     <li class="bg-white rounded-lg shadow {{ $loop->last ? '' : 'sm:mr-4' }} list-none">
                         <article>
                             <figure>
-                                <img class="h-48 w-full object-cover object-center" src="{{ Storage::url($service->image) }}" alt="">
+                                <img class="h-96 w-full object-cover object-center rounded-lg" src="{{ Storage::url($service->image) }}" alt="">
                             </figure>
                             <div class="py-4 px-6">
                                 <h1 class="text-lg font-semibold">

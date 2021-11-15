@@ -8,6 +8,7 @@ require('./editMap');
 require('./editMap2');
 require('./showMap');
 require('./showMap2');
+require('./mapContact');
 
 import Alpine from 'alpinejs';
 
