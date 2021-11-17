@@ -25,8 +25,8 @@
                 <div class="mt-8 lg:mt-0 lg:w-1/2">
                     <div class="flex items-center justify-center lg:justify-end">
                         <div class="w-full">
-                            <img class="object-cover object-center w-full h-96 rounded-md shadow"
-                                src="{{ asset('img/contact.jpg') }}"
+                            <img class="object-cover object-center w-full h-96 rounded-lg shadow"
+                                src="{{ Storage::url($info->image) }}"
                                 alt="">
                         </div>
                     </div>
@@ -50,22 +50,25 @@
                     </div>
                 </div>
 
-                <div class="lg:w-1/2">
+                <div class=" lg:w-1/2">
                     <h2
                         class="flex justify-center lg:justify-start items-center text-2xl font-bold text-gray-800 dark:text-gray-100 md:px-16 ">
                         Encuentranos</h2>
 
                     <div
-                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 px-24 lg:px-18">
-                        <label class="font-bold" for="">Dirección: </label>
+                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 md:px-24 lg:px-18">
+                        <p class="font-bold text-center md:text-left">Dirección: 
+                            <span class="font-normal">{{$info->address}}</span></p> 
                     </div>
                     <div
-                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 px-24 lg:px-18">
-                        <label class="font-bold" for="">Telefono: </label>
+                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 md:px-24 lg:px-18">
+                        <p class="font-bold text-center md:text-left">Telefono: 
+                            <span class="font-normal">{{$info->telephone}}</span></p>
                     </div>
                     <div
-                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 px-24 lg:px-18">
-                        <label class="font-bold" for="">Horarios de atención: </label>
+                        class="flex justify-center lg:justify-start items-center mt-4 text-gray-500 dark:text-gray-400 md:px-24 lg:px-18">
+                        <p class="font-bold text-center md:text-left">Horarios de atención: 
+                            <span class="font-normal">{{$info->schedule}}</span></p>
                     </div>
 
                     <h2
@@ -73,7 +76,8 @@
                         Nuestras redes sociales</h2>
 
                     <div class="flex justify-center lg:justify-start items-center mt-6">
-                        <a class="mx-2 lg:ml-24" href="#" aria-label="Twitter">
+                        <a href="{{ $info->twitter }}"
+                            class="mx-2 lg:ml-24" aria-label="Twitter">
                             <svg class="w-10 h-10 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path
@@ -81,7 +85,8 @@
                             </svg>
                         </a>
 
-                        <a class="mx-2" href="#" aria-label="Facebook">
+                        <a href="{{ $info->facebook }}"
+                            class="mx-2" aria-label="Facebook">
                             <svg class="w-10 h-10 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path
@@ -89,7 +94,8 @@
                             </svg>
                         </a>
 
-                        <a class="mx-2" href="#" aria-label="Linkden">
+                        <a href="{{ $info->instagram }}"
+                            class="mx-2" aria-label="Linkden">
                             <svg class="w-8 h-8 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
@@ -97,7 +103,8 @@
                             </svg>
                         </a>
 
-                        <a class="mx-2" href="#" aria-label="Github">
+                        <a href="{{ $info->whatsapp }}"
+                            class="mx-2" aria-label="Github">
                             <svg class="w-8 h-8 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path

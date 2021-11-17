@@ -16,7 +16,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Livewire\Contact;
+use App\Http\Livewire\Schedule;
 use App\Http\Livewire\Who;
+use App\Mail\ContactMailable;
+use Illuminate\Support\Facades\Mail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +38,7 @@ Route::get('categories/{category}', [CategoryController::class, 'show'])->name('
 Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
 Route::get('quienes-somos/', Who::class)->name('who.show');
+Route::get('agenda/', Schedule::class)->name('agenda');
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
@@ -51,4 +56,5 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
 
     Route::get('contactenos/', Contact::class)->name('contact');
+    Route::view('/contact', 'emails.contact');
 });
