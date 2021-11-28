@@ -28,6 +28,6 @@ class MergeTheCart
     public function handle(Login $event)
     {
         //restore the content of the Cart
-        Cart::merge(auth()->user()->id);
+        //Cart::merge(auth()->user()->id);
     }
 }

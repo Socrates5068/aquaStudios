@@ -32,6 +32,8 @@ class CreateOrdersTable extends Migration
             $table->string('d_address', 60)->nullable();
             $table->text('comment', 2000)->nullable();
             $table->json('dates');
+            $table->string('transaction')->nullable();
+            $table->string('url_transaction')->nullable();
 
             $table->timestamps();
         });

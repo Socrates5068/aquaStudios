@@ -13,13 +13,13 @@ class CreateService extends Component
     use WithFileUploads;
 
     public $categories;
-    public $image;
-    public $name, $description, $price;    
+    public $image, $tmp;
+    public $name, $description, $price;
     public $category_id = "";
     protected $rules = [
         'category_id' => 'required',
         'name' => 'required|max:60',
-        'image' => 'image|max:4096',
+        'image' => 'required|image|max:4096',
         'description' => 'required|max:2000',
         'price' => 'required|numeric'
     ];
@@ -29,8 +29,18 @@ class CreateService extends Component
         $this->categories = Category::all();
     }
 
+    public function updatedImage()
+    {
+        $this->validate([
+            'image' => 'image|max:2048', // 1MB Max
+        ]);
+
+        $this->tmp = $this->image;
+    }
+
     public function save(){
         $rules = $this->rules;
+
         $this->validate($rules);
 
         $url_image = Storage::put('services', $this->image);

@@ -28,7 +28,7 @@
                                 </a>
                             </h1>
                             <p class="font-bold text-trueGray-700">
-                                {{ $service->price }}
+                                BOB {{ $service->price }}
                             </p>
                         </div>
                         <div class="ml-2 mt-4 md:mt-auto mb-2">
@@ -55,6 +55,7 @@
                             <div class="flex justify-between">
                                 <div>
                                     <h1 class="text-lg font-semibold text-gray-700">{{ $service->name }}</h1>
+                                    <p class="hidden md:block" >{!! substr($service->description, 0, 100) !!}.....</p>
                                 </div>
                                 <div>
                                     <p class="font-bold text-gray-700">BOB {{ $service->price }}</p>

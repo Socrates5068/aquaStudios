@@ -159,6 +159,17 @@
                                 Contactenos
                             </a>
                     </li>
+
+                    <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                        <a href="{{ route('agenda') }}"
+                                class="py-2 px-4 text-sm flex items-center">
+
+                                <span class="flex justify-center w-9">
+                                    <i class="fas fa-calendar-week"></i>
+                                </span>
+                                Agenda
+                            </a>
+                    </li>
                 </ul>
 
                 <div class="col-span-3 bg-gray-100">
@@ -201,6 +212,17 @@
                                 <i class="fas fa-mail-bulk"></i>
                             </span>
                             Contactenos
+                        </a>
+                </li>
+
+                <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                    <a href="{{ route('agenda') }}"
+                            class="py-2 px-4 text-sm flex items-center">
+
+                            <span class="flex justify-center w-9">
+                                <i class="fas fa-calendar-week"></i>
+                            </span>
+                            Agenda
                         </a>
                 </li>
             </ul>

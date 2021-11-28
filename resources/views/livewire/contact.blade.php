@@ -1,4 +1,12 @@
 <div>
+    {{-- Update state --}}
+    <div wire:loading.delay wire:target="send" class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 text-center">
+        <span class="text-green-500 opacity-75 top-1/2 -mt-24 mb-2 mx-auto block relative" style="top: 50%;">
+            <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+        </span>
+        <p class="text-2xl text-green-500 top-1/2 block relative">Enviando mensaje, espere por favor...</p>
+    </div>
+
     <div class="md:mt-4 w-full max-w-2xl px-6 py-4 mx-auto">
         @if (session()->has('message'))
             <div class="flex w-full mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">

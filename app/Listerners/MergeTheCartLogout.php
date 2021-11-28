@@ -28,8 +28,8 @@ class MergeTheCartLogout
     public function handle(Logout $event)
     {
         //first delete register
-        Cart::erase(auth()->user()->id);
+        //Cart::erase(auth()->user()->id);
         //new register for the cart
-        Cart::store(auth()->user()->id);
+        //Cart::store(auth()->user()->id);
     }
 }

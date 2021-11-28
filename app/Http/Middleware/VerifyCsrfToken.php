@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'http://aquastudios.test/api/pago-exitoso',
+        'http://aquastudios.store/api/pago-exitoso',
     ];
 }

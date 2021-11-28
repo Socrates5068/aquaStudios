@@ -15,7 +15,7 @@ class CreateOrder extends Component
     use WithFileUploads;
 
     //Image
-    public $url, $invitation;
+    public $url, $invitation, $tmp;
     
     public $service;
     public $schedules;
@@ -69,6 +69,15 @@ class CreateOrder extends Component
         $this->service = $service;
         $this->schedules = new Date();
         $this->schedules = Date::all();
+    }
+
+    public function updatedInvitation()
+    {
+        $this->validate([
+            'invitation' => 'image|max:4096', // 1MB Max
+        ]);
+
+        $this->tmp = $this->invitation;
     }
 
     public function getLatitudeForInput($value, $value2)

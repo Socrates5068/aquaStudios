@@ -26,11 +26,11 @@
         integrity="sha512-tHimK/KZS+o34ZpPNOvb/bTHZb6ocWFXCtdGqAlWYUcz+BGHbNbHMKvEHUyFxgJhQcEO87yg5YqaJvyQgAEEtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
     <script src={{ asset('js/sweetalert2@11.js') }}></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-roboto antialiased">
     <x-jet-banner />
 
     <div class="min-h-screen bg-gray-100">
@@ -61,13 +61,14 @@
         <div>
             <span class="footer-title">Empresa</span>
             <a href="{{ route('who.show') }}" class="link link-hover">Quienes somos</a>
+            <a href="/politicas" class="link link-hover">Políticas y privacidad</a>
             <a href="{{ route('contact') }}" class="link link-hover">Contactenos</a>
             <a href="{{ route('agenda') }}" class="link link-hover">Agenda</a>
         </div>
         <div>
             <span class="footer-title">Social</span>
             <div class="grid grid-flow-col gap-4">
-                <a href="{{ $info->twitter }}" class="" aria-label="Twitter">
+                <a href="{{ $info->twitter }}" target="_blank" aria-label="Twitter">
                     <svg class="text-white fill-current dark:text-gray-200 hover:text-blue-600 dark:hover:text-gray-400"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                         <path
@@ -75,7 +76,7 @@
                     </svg>
                 </a>
 
-                <a href="{{ $info->facebook }}" class="" aria-label="Facebook">
+                <a href="{{ $info->facebook }}" target="_blank" aria-label="Facebook">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         class="text-white fill-current dark:text-gray-200 hover:text-blue-600 dark:hover:text-gray-400">
                         <path
@@ -84,7 +85,7 @@
                     </svg>
                 </a>
 
-                <a href="{{ $info->instagram }}" class="" aria-label="Intagra,">
+                <a href="{{ $info->instagram }}" target="_blank" aria-label="Intagra,">
                     <svg class="text-white fill-current dark:text-gray-200 hover:text-red-600 dark:hover:text-gray-400"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path

@@ -55,15 +55,13 @@
             <div class="mb-4">
                 <div wire:ignore>
                     <x-jet-label value="Descripción" />
-                    <textarea class="w-full form-control" rows="4" wire:model="service.description" x-data x-init="ClassicEditor.create( $refs.miEditor )
-                        .then(function(editor){
-                            editor.model.document.on('change:data', () => {
-                                @this.set('service.description', editor.getData())
-                            })
-                        })
-                        .catch( error => {
-                            console.error( error );
-                        } );" x-ref="miEditor">
+                    <textarea class="w-full form-control" rows="4" wire:model="service.description" 
+                    x-data x-init="const editor = CKEDITOR.replace($refs.miEditor);
+                    editor.on('change', function(event){
+                        console.log(event.editor.getData())
+                        @this.set('service.description', event.editor.getData());
+                    })"
+                x-ref="miEditor">
                     </textarea>
                 </div>
                 <x-jet-input-error for="service.description" />

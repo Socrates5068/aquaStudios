@@ -20,7 +20,7 @@
                         <article class="flex-1">
                             <h1 class="font-bold">{{$item->name}}</h1>
                             <p>Cantidad: {{$item->qty}}</p>
-                            <p>USD: {{$item->price}}</p>
+                            <p>BOB: {{$item->price}}</p>
                         </article>
                     </li>
                 @empty

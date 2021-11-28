@@ -14,11 +14,11 @@
 
         <div class="antialiased sans-serif bg-gray-100 h-screen">
             <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
-                <div class="container mx-auto px-4 py-2 md:py-24">
+                <div class="container mx-auto px-4 py-2 md:py-16">
 
-                    <div class="font-bold text-gray-800 text-xl mb-4">
+                    {{-- <div class="font-bold text-gray-800 text-xl mb-4">
                         Agenda
-                    </div>
+                    </div> --}}
 
                     <div class="bg-white rounded-lg shadow overflow-hidden">
 
@@ -73,7 +73,7 @@
                                     <div style="width: 14.28%; height: 120px"
                                         class="px-4 pt-2 border-r border-b relative">
                                         <div @click="showEventModal(date)" x-text="date"
-                                            class="mt-4 inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100"
+                                            class="mt-4 md:mt-0 inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100"
                                             :class="{'bg-blue-500 text-white': isToday(date) == true, 'text-gray-700 hover:bg-blue-200': isToday(date) == false }">
                                         </div>
                                         <div style="height: 80px;" class="overflow-y-auto mt-1">
@@ -83,9 +83,9 @@
                                                 x-text="events.filter(e => new Date(e.event_date).toDateString() === new Date(year, month, date).toDateString()).length">
                                             </div>
 
-                                        <template
+                                        <template 
                                             x-for="event in events.filter(e => new Date(e.event_date).toDateString() ===  new Date(year, month, date).toDateString() )">
-                                            <div class="md:px-2 py-0.5 rounded-lg mt-1 overflow-hidden md:border" :class="{
+                                            <div class="mt-1 md:px-2 py-0.5 rounded-lg md:mt-1 overflow-hidden md:border" :class="{
                                                     'border-blue-200 text-blue-800 bg-blue-100': event.event_theme === 'blue',
                                                     'border-red-200 text-red-800 bg-red-100': event.event_theme === 'red',
                                                     'border-yellow-200 text-yellow-800 bg-yellow-100': event.event_theme === 'yellow',

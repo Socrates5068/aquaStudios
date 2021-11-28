@@ -15,7 +15,7 @@
                         <img class="h-15 w-20 object-center mr-4" src="{{ Storage::url($service->image) }}" alt="">
                         <article class="flex-1">
                             <h1 class="text-sm md:text-base font-bold">{{ $service->name }}</h1>
-                            <p class="text-sm md:text-base">USD: {{ $service->price }}</p>
+                            <p class="text-sm md:text-base">BOB: {{ $service->price }}</p>
                         </article>
                     </li>
                 @else
@@ -28,9 +28,10 @@
             </ul>
 
             <div class="text-gray-700">
-                <p class=" flex justify-between items-center">
-                    {{ $service->description }}
-                </p>
+                <h1 class="mt-3 font-roboto text-lg font-bold text-gray-800 dark:text-white">Detalles del servicio</h1>
+                <span class="prose prose-sm font-roboto mt-2 text-sm md:text-base text-gray-600 dark:text-gray-400">
+                    {!!$service->description!!}
+                </span>
             </div>
 
             <hr class="mt-4 mb-3">
@@ -57,17 +58,17 @@
             </div>
         </div>
     </div>
-    
+
     {{-- Order information --}}
     <div class="order-2 lg:order-1 lg:col-span-1 xl:col-span-3">
 
         {{-- Delivery options --}}
         <div x-data="{delivery_type: @entangle('delivery_type')}" class="mb-4">
-            <p class="mt-4 text-sm md:text-basemt-4 md:mt-0 mb-3 text-gray-700 font-semibold uppercase">Envio</p>
+            <p class="font-roboto mt-4 text-sm md:text-basemt-4 md:mt-0 mb-3 text-gray-700 font-semibold uppercase">Envio</p>
 
             <label class="bg-white rounded-lg shadow px-6 py-4 flex items-center mb-4 cursor-pointer">
                 <input x-model="delivery_type" type="radio" value="1" name="delivery_type" class="text-gray-600">
-                <span class="text-sm md:text-base ml-2 text-gray-700">Recoger en tienda</span>
+                <span class="font-roboto text-sm md:text-base ml-2 text-gray-700">Recoger en tienda</span>
                 <span class="text-sm md:text-base font-semibold text-gray-700 ml-auto">Gratis</span>
             </label>
 
@@ -91,7 +92,7 @@
 
         {{-- information for delivery --}}
         <div class="bg-white rounded-lg shadow p-6">
-            <p class="text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de contacto</p>
+            <p class="font-roboto text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de contacto del evento</p>
             <div class="mb-4">
                 <x-jet-label value="Nombre de contacto" />
                 <x-jet-input type="text" wire:model.defer="contact" placeholder="Ingrese el nombre de contacto"
@@ -116,6 +117,10 @@
                 <div class="flex">
                     <x-jet-label value="Invitación (Opcional)" />
                 </div>
+                @if ($tmp)
+                    Vista previa de la imagen:
+                    <img class="mb-4 h-96" src="{{ $tmp->temporaryUrl() }}">
+                @endif
                 <div class="flex items-center justify-center w-full">
                     <label
                         class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
@@ -130,7 +135,8 @@
                             <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                 Selecciona una foto</p>
                         </div>
-                        <input wire:model.defer="invitation" type="file" class="opacity-0" 
+
+                        <input wire:model="invitation" type="file" class="opacity-0"
                             accept="image/png, image/gif, image/jpeg, image/jpg, image/bmp" />
                     </label>
                 </div>
@@ -142,12 +148,12 @@
             {{-- Map address 1 --}}
             <div class="mb-6">
                 <x-jet-label value="Dirección principal del evento" class="" />
-                <x-jet-input type="text" wire:model.defer="address_1" 
-                            placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
-                            class="w-full mb-3" />
+                <x-jet-input type="text" wire:model.defer="address_1" placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
+                    class="w-full mb-3" />
                 <x-jet-input-error for="address_1" />
-                
-                <x-jet-label value="A continuación marque la ubicación aproximada en el mapa" class="flex-1 text-center" />
+
+                <x-jet-label value="A continuación marque la ubicación aproximada en el mapa"
+                    class="flex-1 text-center" />
                 <div id='mapa' class="h-80 mb-2" wire:ignore></div>
                 {{-- {{$lat}} {{$lng}} --}}
                 <input type="hidden" wire:model="lat" id="lat">
@@ -156,42 +162,42 @@
 
                 <x-jet-label value="Seleccione una fecha y una hora" class="mb-2 mt-6" />
                 <div class="mb-6 flex-1">
-                    <x-jet-input type="date" wire:model.defer="dates.date" 
-                                placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
-                                class="mb-3" />
+                    <x-jet-input type="date" wire:model.defer="dates.date"
+                        placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
                     <x-jet-input-error for="dates.date" />
 
-                    <x-jet-input type="time" wire:model.defer="dates.time" 
-                                placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
-                                class="mb-3" />
+                    <x-jet-input type="time" wire:model.defer="dates.time"
+                        placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
                     <x-jet-input-error for="dates.time" />
                     {{-- Modal --}}
-                    <div x-data="{open: @entangle('modal').defer}" 
-                        x-init="setTimeout(() => {open = false }, 3000)" 
-                        x-show="open" x-transition:enter="transition duration-500 transform ease-out" 
+                    <div x-data="{open: @entangle('modal').defer}" x-init="setTimeout(() => {open = false }, 3000)"
+                        x-show="open" x-transition:enter="transition duration-500 transform ease-out"
                         x-transition:enter-start="opacity-1"
-                        x-transition:leave="transition durantion-500 transform ease-in" 
-                        x-transition:leave-end="opacity-0" 
+                        x-transition:leave="transition durantion-500 transform ease-in"
+                        x-transition:leave-end="opacity-0"
                         class="flex items-center p-2 mb-4 text-white bg-red-600 rounded">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                    
+
                         <span class="text-sm md:text-base px-2">
-                            {{"Esta fecha ya se encuentra reservada."}}
+                            {{ 'Esta fecha ya se encuentra reservada.' }}
                         </span>
-                    
+
                     </div>
                 </div>
             </div>
-            
+
             {{-- Map address 2 --}}
             <div x-data="{address_state: @entangle('address_state')}" class="mb-6">
-                <div >
-                    <x-button-enlace color="blue" wire:click="addressType({{ $address_state }})" id="size" class="cursor-pointer">
+                <div>
+                    <x-button-enlace color="blue" wire:click="addressType({{ $address_state }})" id="size"
+                        class="cursor-pointer">
                         @if ($address_state == 1)
-                            Añadir otra dirección  
+                            Añadir otra dirección
                         @else
                             Quitar dirección
                         @endif
@@ -199,13 +205,13 @@
 
                     <div class="hidden" :class="{ 'hidden': address_state != 2 }">
                         <x-jet-label class="mt-4" value="Dirección secundaria" />
-                        <x-jet-input type="text" wire:model.defer="address_2" 
-                                    placeholder="Ej. Ceremonia religiosa en la iglesia de la merced"
-                                    class="w-full mb-3" />
+                        <x-jet-input type="text" wire:model.defer="address_2"
+                            placeholder="Ej. Ceremonia religiosa en la iglesia de la merced" class="w-full mb-3" />
                         <x-jet-input-error for="address_2" />
 
-                        
-                        <x-jet-label value="A continuación marque la ubicación aproximada en el mapa" class="flex-1 text-center" />
+
+                        <x-jet-label value="A continuación marque la ubicación aproximada en el mapa"
+                            class="flex-1 text-center" />
                         <div id='mapa2' class="h-80" wire:ignore></div>
                         {{-- {{$lat1}} {{$lng1}} --}}
                         <input type="hidden" wire:model="lat1" id="lat1">
@@ -213,33 +219,32 @@
 
                         <x-jet-label value="Seleccione una fecha y una hora" class="mb-2" />
                         <div class="mb-6 flex-1">
-                            <x-jet-input type="date" wire:model.defer="dates.date1" 
-                                        placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
-                                        class="mb-3" />
+                            <x-jet-input type="date" wire:model.defer="dates.date1"
+                                placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
                             <x-jet-input-error for="dates.date1" />
 
-                            <x-jet-input type="time" wire:model.defer="dates.time1" 
-                                        placeholder="Ej. Calle Hoyos Nº. 50, Zona central"
-                                        class="mb-3" />
+                            <x-jet-input type="time" wire:model.defer="dates.time1"
+                                placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
                             <x-jet-input-error for="dates.time1" />
 
                             {{-- Modal --}}
-                            <div x-data="{open1: @entangle('modal1')}" 
-                                x-init="setTimeout(() => {open1 = false }, 3000)" 
-                                x-show="open1" x-transition:enter="transition duration-500 transform ease-out" 
+                            <div x-data="{open1: @entangle('modal1')}" x-init="setTimeout(() => {open1 = false }, 3000)"
+                                x-show="open1" x-transition:enter="transition duration-500 transform ease-out"
                                 x-transition:enter-start="opacity-1"
-                                x-transition:leave="transition durantion-500 transform ease-in" 
-                                transition:leave-end="opacity-0" 
+                                x-transition:leave="transition durantion-500 transform ease-in"
+                                transition:leave-end="opacity-0"
                                 class="flex items-center p-2 mb-4 text-white bg-red-600 rounded">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                
-                                    <span class="text-sm md:text-base px-2" id="scheduleError">
-                                        {{"Esta fecha ya se encuentra reservada."}}
-                                    </span>
-                            
+
+                                <span class="text-sm md:text-base px-2" id="scheduleError">
+                                    {{ 'Esta fecha ya se encuentra reservada.' }}
+                                </span>
+
                             </div>
                         </div>
                     </div>
@@ -254,8 +259,7 @@
                     <x-jet-label value="Comentario adicional sobre el evento (Opcional)" />
                 </div>
                 <div wire:ignore>
-                    <textarea class="w-full form-control" rows="4"
-                        wire:model.defer="comment">
+                    <textarea class="w-full form-control" rows="4" wire:model.defer="comment">
                     </textarea>
                 </div>
                 <x-jet-input-error for="comment" />
@@ -265,25 +269,24 @@
 
         {{-- Button form --}}
         <div>
-            <x-jet-button 
-                wire:loading.attr="disabled" 
-                wire:target="create_order" 
-                class="mt-6 mb-4"
+            <x-jet-button wire:loading.attr="disabled" wire:target="create_order" class="mt-6 mb-4"
                 wire:click="$emit('createOrder', 'dodo')">
                 Continuar con la compra
             </x-jet-button>
 
             <hr>
-            <p class="text-sm text-gray-700 mt-2 text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Amet, deserunt consequatur voluptatibus porro eligendi reprehenderit corporis quia autem. Dicta, ratione
-                iusto. Consectetur unde et rerum laborum ullam repellendus aspernatur dignissimos. <a
-                    class="font-semibold text-red-500" href="">Proliticas y privacidad</a> </p>
+            <p class="text-sm text-gray-700 mt-2 text-justify">Las fechas reservadas <strong class="uppercase">
+                 NO PUEDEN SER MODIFICADAS</strong> una vez que el pago por el servicio 
+                 se haya hecho efectivo, esto se realiza de esta forma para ofrecer un mejor servicio al cliente, 
+                 ya que se reservarán nuestros equipos con anticipación para la fecha solicitada por el usuario, 
+                 un cambio a última hora podría afectar la calidad del servicio.
+                 <a class="font-semibold text-red-500" href="/politicas">Políticas de Uso y privacidad</a> </p>
         </div>
-        
+
 
     </div>
 
-    
+
 
 </div>
 @push('script')
@@ -294,7 +297,7 @@
     <script src="https://unpkg.com/esri-leaflet-geocoder" defer></script>
     <script>
         Livewire.on('createOrder', service => {
-        
+
             Swal.fire({
                 title: '¿Está seguro de que los datos son correctos?',
                 text: "¡Las fechas que va a reservar no se pueden modificar!",

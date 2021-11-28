@@ -12,7 +12,24 @@ module.exports = {
     ],
 
     theme: {
+        fontFamily: {
+            'roboto': ['Roboto'],
+            'mogra': ['Mogra']
+        },
+
         extend: {
+            textShadow: {
+                'default': '0 2px 0 #000',
+                'md': '0 2px 2px #000',
+                'h2': '0 0 3px #FF0000, 0 0 5px #0000FF',
+                'h1': '0 0 3px rgba(0, 0, 0, .8), 0 0 5px rgba(0, 0, 0, .9)',
+            },
+
+            backgroundImage: {
+                'hero-pattern': "url('/img/boda.jpg')",
+                'footer-texture': "url('/img/boda.jpg')",
+            },
+
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
@@ -21,7 +38,9 @@ module.exports = {
                 trueGray: colors.trueGray,
                 orange: colors.orange,
                 greenLime: colors.lime,
-              }
+                sky: colors.sky,
+                cyan: colors.cyan,
+            }
         },
     },
 
@@ -32,9 +51,10 @@ module.exports = {
     },
 
     plugins: [
-        require('@tailwindcss/forms'), 
-        require('@tailwindcss/typography'), 
-        require('@tailwindcss/aspect-ratio'), 
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),
         require('daisyui'),
+        require('tailwindcss-textshadow'),
     ],
 };

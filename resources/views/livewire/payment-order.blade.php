@@ -1,4 +1,12 @@
 <div>
+    {{-- Update state --}}
+    <div wire:loading.delay wire:target="libelula" class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 text-center">
+        <span class="text-green-500 opacity-75 top-1/2 -mt-24 mb-2 mx-auto block relative" style="top: 50%;">
+            <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+        </span>
+        <p class="text-2xl text-green-500 top-1/2 block relative">Generando plataforma de pago, espere por favor...</p>
+    </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-6 container py-8">
 
         <div class="order-2 lg:order-1 xl:col-span-3 ">
@@ -57,8 +65,8 @@
                         </tr>
                     </tbody>
                 </table>
-                <p class="mt-4 text-xl font-semibold mb-4">Detalles del servicio</p>
-                {!! $service->description !!}
+                <h1 class="font-roboto text-2xl font-bold text-gray-800 dark:text-white mb-2">Detalles del servicio</h1>
+                <span class="font-roboto mt-2 text-sm md:text-lg text-gray-600 dark:text-gray-400">{!!$service->description!!}</span>
             </div>
         
 
@@ -83,6 +91,32 @@
                 </div>
 
                 <div id="paypal-button-container"></div>
+
+            </div>
+
+            <div class="mt-6 bg-white rounded-lg shadow-lg px-6 pt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <img class="mb-2 h-12" src="{{ asset('img/logo_bnb.png') }}" alt="">
+                        <img class="mb-4 h-12" src="{{ asset('img/bancounion.png') }}" alt="">
+                    </div>
+                    <div class="text-gray-700 mb-5">
+                        <p class="font-semibold uppercase">
+                            Subtotal {{ $order->total - $order->shipping_cost }} BOB
+                        </p>
+                        <p class="font-semibold uppercase">
+                            Envío {{ $order->shipping_cost }} BOB
+                        </p>
+                        <p class="text-lg font-semibold uppercase">
+                            Total {{ $order->total }} BOB
+                        </p>
+                    </div>
+                </div>
+
+                <x-button-enlace color="blue" class="mb-4 w-full cursor-pointer text-center"
+                    wire:click="libelula">
+                    Continuar con el pago
+                </x-button-enlace>
 
             </div>
         </div>

@@ -28,7 +28,8 @@
         <script src={{asset('js/sweetalert2@11.js')}}></script>
         
         {{-- ckeditor --}}
-        <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script> --}}
+        <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
         {{-- dropzone --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

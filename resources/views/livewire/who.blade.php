@@ -12,13 +12,14 @@
                 <div class="lg:w-1/2">
                     <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 md:px-12">¿Quienes somos?</h2>
 
-                    <p class="mt-4 text-gray-500 dark:text-gray-400 md:px-12">
-                        Hi I am jane , software engineer <a class="font-bold text-indigo-600 dark:text-indigo-400"
-                            href="#">@BakaTeam</a> , Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum in
-                        sed non alias, fugiat, commodi nemo ut fugit corrupti dolorem sequi ex veniam consequuntur id,
-                        maiores beatae ipsa omnis aliquam?sed non alias, fugiat, commodi nemo ut fugit corrupti dolorem
-                        sequi ex veniam consequuntur id,sed non alias, fugiat, commodi nemo ut fugit corrupti dolorem
-                        sequi ex veniam consequuntur id,
+                    <p class="text-justify mt-4 text-gray-500 dark:text-gray-400 md:px-12">
+                        Somos una empresa con mas de 9 años de experiencia, dedicada al desarrollo de proyectos Audiovisuales, 
+                        Producción y Post-Producción de video.
+                    </p>
+                    <p class="text-justify mt-4 text-gray-500 dark:text-gray-400 md:px-12">
+                        Contamos con tecnología de punta y personal altamente calificado para alcanzar los resultados que su 
+                        proyecto o empresa necesita. Conformamos un Taller Creativo acorde con los estándares de calidad que los 
+                        nuevos tiempos requieren. 
                     </p>
                 </div>
 
