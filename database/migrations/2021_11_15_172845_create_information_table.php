@@ -19,6 +19,7 @@ class CreateInformationTable extends Migration
             $table->string('address', 100)->default('Pasaje héroes del chaco (Galeria A&A) AMB. 19');
             $table->string('telephone', 30)->default('61883536');
             $table->string('schedule', 100)->default('Lunes a viernes de 9:00 a 16:00');
+            $table->integer('orders')->default(2);
             
             $table->string('twitter', 100)->default('#');
             $table->string('facebook', 100)->default('#');

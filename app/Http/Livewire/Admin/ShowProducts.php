@@ -2,13 +2,22 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Category;
 use App\Models\Service;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 
 class ShowProducts extends Component
 {
+    public $categories;
+
     protected $listeners = ['delete'];
+
+    public function mount()
+    {
+        //$this->categorie = Category::all()->count();
+        $this->categories = Category::all();
+    }
 
     public function delete(Service $service)
     {

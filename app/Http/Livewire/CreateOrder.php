@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Date;
 use App\Models\Order;
 use App\Models\Address;
+use App\Models\Information;
 use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -141,6 +142,7 @@ class CreateOrder extends Component
             $this->url = Storage::put('invitations', $this->invitation);
         }
 
+        $num_orders = Information::first();
         $con = 0;
         $con2 = 0;
         foreach ($this->schedules as $schedule) {
@@ -151,7 +153,7 @@ class CreateOrder extends Component
                 $con2 += 1;
             }
         }
-        if ($con >= 2) {
+        if ($con >= $num_orders->orders) {
             $this->modal = true;
             $this->date_error = "La fecha " . $this->dates['date'] . " ya se encuentra reservada";
             return;

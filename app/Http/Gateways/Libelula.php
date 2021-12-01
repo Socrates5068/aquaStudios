@@ -26,6 +26,10 @@ class LibelulaResponse
 	{
 		return $this->id_transaccion;
 	}
+	public function mensaje()
+	{
+		return $this->mensaje;
+	}
 	public function bind($data)
 	{
 		array_map(function($k, $v)
@@ -109,11 +113,11 @@ class Libelula
 		//close cURL resource
 		curl_close($ch);
 		//die($result);
-		$obj = json_decode($result, true);
-		/* $obj = (array)json_decode($result);
+		#$obj = json_decode($result, true);
+		$obj = (array)json_decode($result);
 		$response = new LibelulaResponse();
-		$response->bind( $obj);*/
-		return $obj;
-		//return $response;
+		$response->bind( $obj);
+		#return $obj;
+		return $response;
 	}
 }
