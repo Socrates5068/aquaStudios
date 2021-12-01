@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Date;
 use App\Models\Order;
-use App\Models\Service;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Http\Gateways\Libelula;
 use App\Notifications\NotifyUser;
@@ -15,6 +15,7 @@ class PaymentOrder extends Component
     use AuthorizesRequests;
 
     public $order, $user, $dates, $servic;
+    public $uuid;
 
     protected $listeners = ['payOrder'];
 
@@ -71,49 +72,50 @@ class PaymentOrder extends Component
 
     public function libelula()
     {
-        if ($this->order->url_transaction) {
-            return redirect($this->order->url_transaction);
-        } else {
-            $fecha_expiracion = new \DateTime();
-            $fecha_expiracion->add(new \DateInterval('P1D'));
+        $fecha_expiracion = new \DateTime();
+        $fecha_expiracion->add(new \DateInterval('P1D'));
+        $uuid = (string) Str::uuid();
+        //$this->uuid = $uuid;
+        //$id = str_pad($this->order->id, 4, '0', STR_PAD_LEFT);
 
-            $appkey = 'aa5bc37a-14a3-5934-b2e9-bec7777cd4d8';
-            $data = array(
-                //'callback_url'			=> route('libelula_callback'),
-                'callback_url'            => route('pay.auto'),
-                'url_retorno'            => 'http://aquastudios.store/orders/' . $this->order->id,
-                'email_cliente'         => 'noreply@aquastudios.store',
-                'identificador_deuda'     => str_pad($this->order->id, 4, '0', STR_PAD_LEFT),
-                'fecha_vencimiento'        => $fecha_expiracion->format('Y-m-d'),
-                'descripcion'            => 'Pago Compra Online',
-                'nombre_cliente'         => $this->order->user->name,
-                'tipo_factura'             => '0', //Servicios
-                'emite_factura'            => 0,
-                'moneda'                => 'BOB',
-                'lineas_detalle_deuda'    => [
-                    [
-                        'cantidad'             => 1,
-                        'concepto'             => 'Pago de servicios',
-                        'costo_unitario'     => (float)$this->order->total, // * (int)$this->quantitySeats,
-                    ]
+        $appkey = 'aa5bc37a-14a3-5934-b2e9-bec7777cd4d8';
+        $data = array(
+            //'callback_url'			=> route('libelula_callback'),
+            'callback_url'            => route('pay.auto'),
+            'url_retorno'            => 'http://aquastudios.store/orders/' . $this->order->id,
+            'email_cliente'         => 'noreply@aquastudios.store',
+            'identificador_deuda'     => $uuid,
+            'fecha_vencimiento'        => $fecha_expiracion->format('Y-m-d'),
+            'descripcion'            => 'Pago Compra Online',
+            'nombre_cliente'         => $this->order->user->name,
+            'tipo_factura'             => '0', //Servicios
+            'emite_factura'            => 0,
+            'moneda'                => 'BOB',
+            'lineas_detalle_deuda'    => [
+                [
+                    'cantidad'             => 1,
+                    'concepto'             => 'Pago de servicios',
+                    'costo_unitario'     => (float)$this->order->total, // * (int)$this->quantitySeats,
                 ]
-            );
-            try {
-                $libelula = new Libelula($appkey);
-                $libelula->setData($data);
-                $res = $libelula->crearDeuda();
+            ]
+        );
 
-                $this->order->transaction = $res['id_transaccion'];
-                
-                $this->order->url_transaction = $res['url_pasarela_pagos'];
-                $this->order->save();
+        $libelula = new Libelula($appkey);
+        $libelula->setData($data);
+        $res = $libelula->crearDeuda();
 
-                return redirect($res['url_pasarela_pagos']);
-            } catch (\Exception $e) {
-                session()->flash('error', $e->getMessage());
-                return null;
-            }
+        $this->order->transaction = $res->getTransaccion();
+
+        $this->order->url_transaction = $res->getLink();
+        $this->order->save();
+        
+        if (empty($res->getLink())) {
+            session()->flash('error', $res->mensaje());
+            return null;
+        } else {
+            return redirect($res->getLink());
         }
+
     }
 
     public function render()

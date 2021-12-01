@@ -34,7 +34,7 @@
 
                 <div class="col-span-6 sm:col-span-4">
                     <x-jet-label>
-                        Telefono
+                        Teléfono
                     </x-jet-label>
                     <input type="text" wire:model.defer="telephone" class="input input-bordered w-full mt-1">
                     <x-jet-input-error for="telephone" />
@@ -78,6 +78,14 @@
                     </x-jet-label>
                     <input wire:model.defer="whatsapp" type="text" class="input input-success input-bordered w-full mt-1"> 
                     <x-jet-input-error for="whatsapp" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label class="flex justify-between">
+                        Número de servicios por día  <i class="fas fa-concierge-bell text-2xl font-bold text-yellow-600"></i>
+                    </x-jet-label>
+                    <input wire:model.defer="orders" type="text" class="input input-success input-bordered w-full mt-1"> 
+                    <x-jet-input-error for="orders" />
                 </div>
                 
             </x-slot>

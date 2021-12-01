@@ -1,12 +1,32 @@
 <div>
     {{-- Update state --}}
-    <div wire:loading.delay wire:target="libelula" class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 text-center">
+    <div wire:loading.delay wire:target="libelula"
+        class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 text-center">
         <span class="text-green-500 opacity-75 top-1/2 -mt-24 mb-2 mx-auto block relative" style="top: 50%;">
             <i class="fas fa-circle-notch fa-spin fa-5x"></i>
         </span>
         <p class="text-2xl text-green-500 top-1/2 block relative">Generando plataforma de pago, espere por favor...</p>
     </div>
 
+    @if (session()->has('error'))
+        <div class="mt-6 flex w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <div class="flex items-center justify-center w-12 bg-red-500">
+                <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z" />
+                </svg>
+            </div>
+
+            <div class="px-4 py-2 -mx-3">
+                <div class="mx-3">
+                    <span class="font-semibold text-red-500 dark:text-red-400">Error</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">{{ session('error') }} intente nuevamente por
+                        favor.</p>
+                </div>
+            </div>
+        </div>
+    @endif
+    {{ $uuid }}
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-6 container py-8">
 
         <div class="order-2 lg:order-1 xl:col-span-3 ">
@@ -18,7 +38,7 @@
                 </span>
             </div>
 
-            {{--Summary order --}}
+            {{-- Summary order --}}
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                 <div class=" grid grid-cols-2 gap-6 text-gray-700">
                     <div>
@@ -53,7 +73,8 @@
                         <tr>
                             <td>
                                 <div class="flex">
-                                    <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($service->image) }}" alt="">
+                                    <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($service->image) }}"
+                                        alt="">
                                     <article>
                                         <h1 class="font-bold">{{ $service->name }}</h1>
                                     </article>
@@ -66,9 +87,10 @@
                     </tbody>
                 </table>
                 <h1 class="font-roboto text-2xl font-bold text-gray-800 dark:text-white mb-2">Detalles del servicio</h1>
-                <span class="font-roboto mt-2 text-sm md:text-lg text-gray-600 dark:text-gray-400">{!!$service->description!!}</span>
+                <span
+                    class="font-roboto mt-2 text-sm md:text-lg text-gray-600 dark:text-gray-400">{!! $service->description !!}</span>
             </div>
-        
+
 
         </div>
 
@@ -113,8 +135,7 @@
                     </div>
                 </div>
 
-                <x-button-enlace color="blue" class="mb-4 w-full cursor-pointer text-center"
-                    wire:click="libelula">
+                <x-button-enlace class="mb-4 w-full cursor-pointer text-center" wire:click="libelula">
                     Continuar con el pago
                 </x-button-enlace>
 

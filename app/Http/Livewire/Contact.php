@@ -37,7 +37,10 @@ class Contact extends Component
         Mail::to('admin@aquastudios.store')->send(new ContactMailable($name, $email, $message));
 
         session()->flash('message','¡Mensaje enviado correctamente!');
-        return redirect()->to('/contactenos');
+        $this->reset('name');
+        $this->reset('email');
+        $this->reset('message');
+        return null;
     }
 
     public function render()

@@ -12,7 +12,7 @@ class Info extends Component
     use WithFileUploads;
 
     public $info;
-    public $image, $address, $telephone, $schedule;
+    public $image, $address, $telephone, $schedule, $orders;
     public $twitter, $facebook, $instagram, $whatsapp;
 
     public function mount()
@@ -27,6 +27,7 @@ class Info extends Component
         $this->facebook = $this->info->facebook;
         $this->instagram = $this->info->instagram;
         $this->whatsapp = $this->info->whatsapp;
+        $this->orders = $this->info->orders;
     }
 
     protected $rules = [
@@ -36,7 +37,8 @@ class Info extends Component
         'twitter' => 'required|max:100',
         'facebook' => 'required|max:100',
         'instagram' => 'required|max:100',
-        'whatsapp' => 'required|max:100'
+        'whatsapp' => 'required|max:100',
+        'orders' => 'required|numeric|min:1|max:5'
     ];
 
     public function update()
@@ -56,6 +58,7 @@ class Info extends Component
             $this->info->address = $this->address;
             $this->info->telephone = $this->telephone;
             $this->info->schedule = $this->schedule;
+            $this->info->orders = $this->orders;
             $this->info->twitter = $this->twitter;
             $this->info->facebook = $this->facebook;
             $this->info->instagram = $this->instagram;
@@ -69,6 +72,7 @@ class Info extends Component
             $this->info->address = $this->address;
             $this->info->telephone = $this->telephone;
             $this->info->schedule = $this->schedule;
+            $this->info->orders = $this->orders;
             $this->info->twitter = $this->twitter;
             $this->info->facebook = $this->facebook;
             $this->info->instagram = $this->instagram;
