@@ -20,6 +20,7 @@ class CreateInformationTable extends Migration
             $table->string('telephone', 30)->default('61883536');
             $table->string('schedule', 100)->default('Lunes a viernes de 9:00 a 16:00');
             $table->integer('orders')->default(2);
+            $table->integer('cost')->default(100);
             
             $table->string('twitter', 100)->default('#');
             $table->string('facebook', 100)->default('#');

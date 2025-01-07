@@ -39,7 +39,7 @@
         <!-- Page Content -->
         <main> 
             <section>
-                <div class="container flex flex-col items-center px-5 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="container flex flex-col items-center px-5 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                   <div class="card shadow-2xl flex flex-col w-full max-w-4xl mx-auto prose prose-sm text-left prose-blue">
                     <div class="card-body w-full mx-auto">
                       <h1 class="uppercase text-center">POLÍTICAS DE uso y PRIVACIDAD</h1>                   

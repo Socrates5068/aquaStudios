@@ -1,7 +1,7 @@
 <header class="bg-neutral sticky top-0" style="z-index: 900" x-data="dropdown()">
     <div class="container flex items-center h-16 justify-between md:justify-start">
         <a :class="{'bg-opacity-100 text-blue-400': open, 'inline-flex': !open }" x-on:click="show()"
-            class="flex flex-col items-center justify-center order-last md:order-first px-6 md:px-4 bg-white bg-opacity-25 text-white cursor-pointer h-full">
+            class="md:hidden flex flex-col items-center justify-center order-last md:order-first px-6 md:px-4 bg-white bg-opacity-25 text-white cursor-pointer h-full">
             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path :classs="{'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -9,8 +9,9 @@
             <span class="text-sm hidden md:block">Categorías</span>
         </a>
 
-        <a href="/" class="px-4">
-            <x-logo-aqua class="block h-9 w-auto" />
+        <a href="/" class="hover:text-blue-500 px-4 text-white prose">
+            <h2>INICIO</h2>
+            {{-- <x-logo-aqua class="block h-9 w-auto" /> --}}
             {{-- <x-jet-application-mark class="block h-9 w-auto" /> --}}
         </a>
 
@@ -150,6 +151,17 @@
                     </li>
 
                     <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                        <a href="/politicas"
+                                class="py-2 px-4 text-sm flex items-center">
+
+                                <span class="flex justify-center w-9">
+                                    <i class="fas fa-book-open"></i>
+                                </span>
+                                Políticas de uso y privacidad
+                            </a>
+                    </li>
+
+                    <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
                         <a href="{{ route('contact') }}"
                                 class="py-2 px-4 text-sm flex items-center">
 
@@ -201,6 +213,17 @@
                                 <i class="fab fa-adn"></i>
                             </span>
                             Quienes somos
+                        </a>
+                </li>
+
+                <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                    <a href="/politicas"
+                            class="py-2 px-4 text-sm flex items-center">
+
+                            <span class="flex justify-center w-9">
+                                <i class="fas fa-book-open"></i>
+                            </span>
+                            Políticas de uso y privacidad
                         </a>
                 </li>
 

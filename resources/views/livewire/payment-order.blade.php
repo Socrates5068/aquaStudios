@@ -1,15 +1,15 @@
 <div>
     {{-- Update state --}}
-    <div wire:loading.delay wire:target="libelula"
-        class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 text-center">
-        <span class="text-green-500 opacity-75 top-1/2 -mt-24 mb-2 mx-auto block relative" style="top: 50%;">
+    <div wire:loading.delay
+        class="fixed top-0 left-0 z-50 block w-full h-full text-center bg-white opacity-75">
+        <span class="relative block mx-auto mb-2 -mt-24 text-green-500 opacity-75 top-1/2" style="top: 50%;">
             <i class="fas fa-circle-notch fa-spin fa-5x"></i>
         </span>
-        <p class="text-2xl text-green-500 top-1/2 block relative">Generando plataforma de pago, espere por favor...</p>
+        <p class="relative block text-2xl text-green-500 top-1/2">Estamos trabajando, espere por favor...</p>
     </div>
 
     @if (session()->has('error'))
-        <div class="mt-6 flex w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <div class="flex w-full max-w-3xl mx-auto mt-6 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="flex items-center justify-center w-12 bg-red-500">
                 <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -27,10 +27,10 @@
         </div>
     @endif
     {{ $uuid }}
-    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-6 container py-8">
+    <div class="container grid grid-cols-1 gap-6 py-8 lg:grid-cols-2 xl:grid-cols-5">
 
         <div class="order-2 lg:order-1 xl:col-span-3 ">
-            <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
+            <div class="px-6 py-4 mb-6 bg-white rounded-lg shadow-lg">
                 <p class="text-gray-700 uppercase">
                     <span class="font-semibold">
                         Número de Reserva-{{ $order->id }}
@@ -39,8 +39,8 @@
             </div>
 
             {{-- Summary order --}}
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <div class=" grid grid-cols-2 gap-6 text-gray-700">
+            <div class="p-6 mb-6 bg-white rounded-lg shadow-lg">
+                <div class="grid grid-cols-2 gap-6 text-gray-700 ">
                     <div>
                         <p class="text-lg font-semibold uppercase">Envío</p>
                         @if ($order->delivery_type == 1)
@@ -60,9 +60,9 @@
             </div>
 
             {{-- Summary service --}}
-            <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
-                <p class="text-xl font-semibold mb-4">Resumen</p>
-                <table class="table-auto w-full">
+            <div class="p-6 mb-6 text-gray-700 bg-white rounded-lg shadow-lg">
+                <p class="mb-4 text-xl font-semibold">Resumen</p>
+                <table class="w-full table-auto">
                     <thead>
                         <tr>
                             <th></th>
@@ -73,7 +73,7 @@
                         <tr>
                             <td>
                                 <div class="flex">
-                                    <img class="h-15 w-20 object-cover mr-4" src="{{ Storage::url($service->image) }}"
+                                    <img class="object-cover w-20 mr-4 h-15" src="{{ Storage::url($service->image) }}"
                                         alt="">
                                     <article>
                                         <h1 class="font-bold">{{ $service->name }}</h1>
@@ -86,9 +86,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <h1 class="font-roboto text-2xl font-bold text-gray-800 dark:text-white mb-2">Detalles del servicio</h1>
+                <h1 class="mb-2 text-2xl font-bold text-gray-800 font-roboto dark:text-white">Detalles del servicio</h1>
                 <span
-                    class="font-roboto mt-2 text-sm md:text-lg text-gray-600 dark:text-gray-400">{!! $service->description !!}</span>
+                    class="mt-2 text-sm text-gray-600 font-roboto md:text-lg dark:text-gray-400">{!! $service->description !!}</span>
             </div>
 
 
@@ -96,8 +96,8 @@
 
         {{-- Button Paypal --}}
         <div class="order-1 lg:order-2 xl:col-span-2 ">
-            <div class="bg-white rounded-lg shadow-lg px-6 pt-6">
-                <div class="flex justify-between items-center mb-4">
+            <div class="px-6 pt-6 bg-white rounded-lg shadow-lg">
+                <div class="flex items-center justify-between mb-4">
                     <img class="h-12" src="{{ asset('img/MC_VI_DI_2-1.jpg') }}" alt="">
                     <div class="text-gray-700">
                         <p class="font-semibold uppercase">
@@ -116,13 +116,13 @@
 
             </div>
 
-            <div class="mt-6 bg-white rounded-lg shadow-lg px-6 pt-6">
-                <div class="flex justify-between items-center mb-4">
+            <div class="px-6 pt-6 mt-6 bg-white rounded-lg shadow-lg">
+                <div class="flex items-center justify-between mb-4">
                     <div>
-                        <img class="mb-2 h-12" src="{{ asset('img/logo_bnb.png') }}" alt="">
-                        <img class="mb-4 h-12" src="{{ asset('img/bancounion.png') }}" alt="">
+                        <img class="h-12 mb-2" src="{{ asset('img/logo_bnb.png') }}" alt="">
+                        <img class="h-12 mb-4" src="{{ asset('img/bancounion.png') }}" alt="">
                     </div>
-                    <div class="text-gray-700 mb-5">
+                    <div class="mb-5 text-gray-700">
                         <p class="font-semibold uppercase">
                             Subtotal {{ $order->total - $order->shipping_cost }} BOB
                         </p>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <x-button-enlace class="mb-4 w-full cursor-pointer text-center" wire:click="libelula">
+                <x-button-enlace class="w-full mb-4 text-center cursor-pointer" wire:click="libelula">
                     Continuar con el pago
                 </x-button-enlace>
 
@@ -153,10 +153,11 @@
 
                 // Sets up the transaction when a payment button is clicked
                 createOrder: function(data, actions) {
+                    let price = {{ (int)$order->total }};
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: "{{ $order->total }}" // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                                value: "{{ $paypal }}" // Can reference variables or functions. Example: `value: document.getElementById('...').value`
                             }
                         }]
                     });

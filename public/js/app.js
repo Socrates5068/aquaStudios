@@ -5092,7 +5092,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(edit_mapa1); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     }); //Detect pin movement
 
     marker.on('moveend', function (e) {
@@ -5149,7 +5149,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(edit_mapa2); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     }); //Detect pin movement
 
     marker.on('moveend', function (e) {
@@ -5193,7 +5193,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(contact_map); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     });
   }
 });
@@ -5227,7 +5227,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     });
   }
 });
@@ -5238,12 +5238,9 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!******************************!*\
   !*** ./resources/js/mapa.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
-var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
-    map = _require.map,
-    result = _require.result;
-
+// const { map, result } = require("lodash");
 document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelector('#mapa')) {
     /* function searchAddress(e) {
@@ -5287,7 +5284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(mapa); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     }); //Search addresses
 
     /* const search = document.querySelector('#address_1');
@@ -5301,7 +5298,7 @@ document.addEventListener('DOMContentLoaded', function () {
       mapa.panTo(new L.LatLng(position.lat, position.lng)); //Reverse Geocoding, where pin is placed
 
       geocodeService.reverse().latlng(position, 17).run(function (error, result) {
-        //console.log(result)
+        console.log(result);
         marker.bindPopup(result.address.Match_addr);
         marker.openPopup();
         fillInputs(result);
@@ -5355,7 +5352,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(mapa2); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     }); //Detect pin movement
 
     marker.on('moveend', function (e) {
@@ -5403,7 +5400,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(show_mapa1); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     });
   }
 });
@@ -5446,7 +5443,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(show_mapa2); //Geocode service
 
     var geocodeService = L.esri.Geocoding.geocodeService({
-      apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+      apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
     }); //Detect pin movement
 
     marker.on('moveend', function (e) {

@@ -14,6 +14,7 @@ class Info extends Component
     public $info;
     public $image, $address, $telephone, $schedule, $orders;
     public $twitter, $facebook, $instagram, $whatsapp;
+    public $cost;
 
     public function mount()
     {
@@ -28,6 +29,7 @@ class Info extends Component
         $this->instagram = $this->info->instagram;
         $this->whatsapp = $this->info->whatsapp;
         $this->orders = $this->info->orders;
+        $this->cost = $this->info->cost;
     }
 
     protected $rules = [
@@ -38,7 +40,8 @@ class Info extends Component
         'facebook' => 'required|max:100',
         'instagram' => 'required|max:100',
         'whatsapp' => 'required|max:100',
-        'orders' => 'required|numeric|min:1|max:5'
+        'orders' => 'required|numeric|min:1|max:5',
+        'cost' => 'required|numeric|min:1|max:200'
     ];
 
     public function update()
@@ -59,6 +62,7 @@ class Info extends Component
             $this->info->telephone = $this->telephone;
             $this->info->schedule = $this->schedule;
             $this->info->orders = $this->orders;
+            $this->info->cost = $this->cost;
             $this->info->twitter = $this->twitter;
             $this->info->facebook = $this->facebook;
             $this->info->instagram = $this->instagram;
@@ -73,6 +77,7 @@ class Info extends Component
             $this->info->telephone = $this->telephone;
             $this->info->schedule = $this->schedule;
             $this->info->orders = $this->orders;
+            $this->info->cost = $this->cost;
             $this->info->twitter = $this->twitter;
             $this->info->facebook = $this->facebook;
             $this->info->instagram = $this->instagram;

@@ -80,7 +80,7 @@
         </div>
 
         <div class="mb-4">
-            <x-jet-label value="Precio" />
+            <x-jet-label value="Precio en Bs." />
             <x-jet-input class="w-full" type="number" step=".01" wire:model="price"
                 placeholder="Ingrese el precio del servicio" />
             <x-jet-input-error for="price" />

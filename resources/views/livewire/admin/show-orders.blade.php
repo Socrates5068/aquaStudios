@@ -1,4 +1,7 @@
 <div>
+    @php
+        use App\Models\Category;
+    @endphp
     <x-slot name="header">
         <div class="flex items-center">
             <h2 class="font-semibold text-xl text-gray-600 leading-tight">
@@ -6,7 +9,36 @@
             </h2>
         </div>
     </x-slot>
+    <div class="grid justify-items-end px-8">
+        <div class="justify-self-start">
+            <x-jet-input class="mb-4 text-center"
+                type="date"
+                wire:model.defer='from'
+                >
+            </x-jet-input>
+            <x-jet-input-error for="from" />
 
+            <x-jet-input class="mb-4 text-center"
+                type="date"
+                wire:model.defer='to'
+                >
+            </x-jet-input>
+            <x-jet-input-error for="to" />
+        
+        <div class="justify-self-start">
+            <x-jet-button class="text-center"
+                wire:click="SetFromAndTo"
+                >
+                Generar reporte
+            </x-jet-button>
+
+            <x-button-enlace class="text-center cursor-pointer"
+                wire:click='savePdf'
+                >
+                Generar PDF
+            </x-button-enlace>
+        </div>
+    </div>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="container py-12">
         <x-table-responsive>
@@ -23,7 +55,7 @@
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Dirección
+                            Evento y categoria
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -35,15 +67,15 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($orders as $order)
+                    @foreach($this->getorders() as $order)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                   {{--  <div class="flex-shrink-0 h-10 w-10">
+                                    <div class="flex-shrink-0 h-10 w-10">
                                         <img class="h-10 w-10 rounded-full object-cover"
-                                            src="{{ Storage::url($order->image) }}"
+                                            src="{{ $order->user->profile_photo_url }}"
                                             alt="">
-                                    </div> --}}
+                                    </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900">
                                             {{ $order->name_contact }}
@@ -53,11 +85,18 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">
-                                    {{ substr($order->phone_contact, 0, 50) . "..."}}
+                                    {{ substr($order->phone_contact, 0, 50)}}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{$order->d_address}}
+                                @php
+                                    $service = json_decode($order->service, true);
+                                    $category = Category::where('id', $service['category_id'])->first();
+                                @endphp
+                                {{$service['name']}} <br>
+                                @if ($category)
+                                    {{$category->name}}
+                                @endif                                
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @switch($order->status)
@@ -121,9 +160,11 @@
                 </tbody>
             </table>
 
-            <div   class="px-6 py-4">
-                {{$orders->links()}}
-            </div>
+            @if ($num == 0)
+                <div class="px-6 py-4">
+                    {{$this->getorders()->links()}}
+                </div>
+            @endif
         </x-table-responsive>
 
     </div>

@@ -13,14 +13,14 @@
                                 </a>
                             </figure>
 
-                            <div class="px-4 py-2">
+                            <div class="px-4 py-2 h-52">
                                 <h1 class="font-roboto text-3xl font-bold text-gray-800 uppercase dark:text-white">
                                     <a href=" {{ route('services.show', $service) }} ">
                                         {{ $service->name }}
                                     </a>
                                 </h1>
                                 <span class="prose prose-sm font-roboto font-light mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                    {!! substr($service->description, 0, 280) !!} ......
+                                    {!! substr($service->description, 0, 330) !!} ......
                                 </span>
                             </div>
 
@@ -38,8 +38,8 @@
 
             </div>
 
-            <button aria-label="Previous" class="glider-prev">«</button>
-            <button aria-label="Next" class="glider-next">»</button>
+            <button aria-label="Previous" class="hidden md:block glider-prev">«</button>
+            <button aria-label="Next" class="hidden md:block glider-next">»</button>
             <div role="tablist" class="dots"></div>
         </div>
     @else

@@ -23,6 +23,9 @@
                 </x-jet-label>
                 <x-jet-input wire:model.defer="createForm.icon" class="w-full mt-1" type="text" id={{$rand}} />
                 <x-jet-input-error for="createForm.icon" />
+                <p class="mt-2 font-roboto text-sm">
+                    Escoger un ícono <a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&q=video&c=audio-video&m=free" target="_blank" class="link link-secondary">aquí</a>
+                </p>
             </div>
             
         </x-slot>

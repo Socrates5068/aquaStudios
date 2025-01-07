@@ -5,29 +5,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if(document.querySelector('#mapa2')){
         const lat = -19.589242065828227;
         const lng = -65.75317989371399;
-        
+
         const mapa2 = L.map('mapa2').setView([lat, lng], 17).invalidateSize();
-        
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapa2);
 
         let size = document.getElementById("size");
         size.onclick = badSize2;
-        
+
         /* let mapa = document.getElementById("mapa2");
         mapa.onmouseover = badSize; */
-        
+
         function badSize() {
-            mapa2.invalidateSize()           
+            mapa2.invalidateSize()
         }
 
         function badSize2() {
-            setTimeout(badSize,500);    
+            setTimeout(badSize,500);
         }
-        
+
         let marker;
-    
+
         // agregar el pin
         marker = new L.marker([lat, lng], {
             draggable: true,
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Geocode service
         const geocodeService = L.esri.Geocoding.geocodeService({
-            apikey: "AAPK528d8e28633d4e4c83da0275dd9e47a2rpgO3F3VeG7sYd17rgzJr60fK80F6aZoz5swMRZzp35ppAYF7blQYXLo2D1zb7D9"
+            apikey: "AAPTxy8BH1VEsoebNVZXo8HurPBS0yGaf37Qt1VxTCBjAn4DLWmx3OlN5mU-uDONiTLds2sWaDkutCLFLYNMtRw7W0m1NXXmuIhOv8nZczQ3aLduP1-UJPYqkjaRGXD8v8LTaZjc88G34JPq-ux6gtcxOCYnohIlKaKvwrI2Zhi58jFuUFbkRzXGxMRsXcumBx9ehKv-WXz1zXG_gzA3CKDPfXeAN6qWFOpw4kR2HsVpRU0.AT1_dQwB8hFk"
         });
 
         //Detect pin movement
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 badSize();
             })
         });
-        
+
         function fillInputs (result) {
             //console.log(result)
 

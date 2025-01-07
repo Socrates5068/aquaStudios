@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Service;
+use App\Http\Livewire\Admin\PDF;
 use App\Http\Livewire\Admin\Info;
+use App\Http\Livewire\Admin\BackUps;
 use App\Http\Livewire\Admin\Schedule;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\EditOrder;
@@ -11,7 +13,9 @@ use App\Http\Livewire\Admin\ShowProducts;
 use App\Http\Livewire\Admin\CreateService;
 use App\Http\Livewire\Admin\UserComponent;
 use App\Http\Livewire\Admin\ScheduleDelete;
+use App\Http\Controllers\Admin\PdfController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\CategoryController;
 
 /* Admin services */
@@ -39,3 +43,14 @@ Route::get('schedule/delete/', ScheduleDelete::class)->name('admin.schedule.dele
 
 /* Information */
 Route::get('information', Info::class)->name('admin.info');
+
+/* BackUp */
+Route::get('backups', [BackupController::class, 'index'])->name('admin.backup.backups');
+Route::get('/backup/create', [BackupController::class, 'create'])->name('admin.backup.create');
+Route::get('/backup/download/{file_name}', [BackupController::class, 'download'])->name('admin.backup.download');
+Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete'])->name('admin.backup.delete');
+
+/* PDF */
+Route::get('pdf', [PdfController::class, 'index'])->name('admin.pdf.index');
+Route::get('download', [PdfController::class, 'download'])->name('admin.pdf.download');
+//Route::get('pdf/{from}/{to}', PDF::class)->name('admin.pdf');

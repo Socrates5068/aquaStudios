@@ -123,7 +123,7 @@
             </div>
             <div class="grid justify-items-stretch">
                 <div class="justify-self-end">
-                    <x-button-enlace color="blue" class="text-center" href="{{ $whatsApp }}" target="_blank">
+                    <x-button-enlace color="green" class="text-center" href="{{ $whatsApp }}" target="_blank">
                         notificar al usuario por WhatApp
                     </x-button-enlace>
                 </div>

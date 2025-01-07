@@ -30,7 +30,7 @@
             <div class="text-gray-700">
                 <h1 class="mt-3 font-roboto text-lg font-bold text-gray-800 dark:text-white">Detalles del servicio</h1>
                 <span class="prose prose-sm font-roboto mt-2 text-sm md:text-base text-gray-600 dark:text-gray-400">
-                    {!!$service->description!!}
+                    {!! $service->description !!}
                 </span>
             </div>
 
@@ -50,12 +50,28 @@
                 <p class=" flex justify-between items-center font-semibold">
                     <span class="text-lg">Total</span>
                     @if ($delivery_type == 1)
-                        {{ $service->price }} BOB
+                        {{ $service->price + $totalmin }} BOB
                     @else
-                        {{ $service->price + $shipping_cost }} BOB
+                        {{ $service->price + $shipping_cost +$totalmin }} BOB
                     @endif
                 </p>
             </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mt-2">
+            <p>
+                <span class="text-lg font-semibold">¡Horas extra!</span>
+            </p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-title">Minutos adicionales de grabación</div>
+                    <div class="stat-value">{{ $min }}</div>
+                    <div class="stat-desc">Hasta un máximo de 2 horas</div>
+                </div>
+            </div>
+            
+            <x-jet-input type="range" max="120" wire:model="min" wire:click="price" class="w-full" />
+            <x-jet-input-error for="phone" />
         </div>
     </div>
 
@@ -64,7 +80,8 @@
 
         {{-- Delivery options --}}
         <div x-data="{delivery_type: @entangle('delivery_type')}" class="mb-4">
-            <p class="font-roboto mt-4 text-sm md:text-basemt-4 md:mt-0 mb-3 text-gray-700 font-semibold uppercase">Envio</p>
+            <p class="font-roboto mt-4 text-sm md:text-basemt-4 md:mt-0 mb-3 text-gray-700 font-semibold uppercase">
+                Envio</p>
 
             <label class="bg-white rounded-lg shadow px-6 py-4 flex items-center mb-4 cursor-pointer">
                 <input x-model="delivery_type" type="radio" value="1" name="delivery_type" class="text-gray-600">
@@ -92,7 +109,8 @@
 
         {{-- information for delivery --}}
         <div class="bg-white rounded-lg shadow p-6">
-            <p class="font-roboto text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de contacto del evento</p>
+            <p class="font-roboto text-sm md:text-base text-gray-700 font-semibold uppercase mb-4 -mt-2">Información de
+                contacto del evento</p>
             <div class="mb-4">
                 <x-jet-label value="Nombre de contacto" />
                 <x-jet-input type="text" wire:model.defer="contact" placeholder="Ingrese el nombre de contacto"
@@ -162,8 +180,7 @@
 
                 <x-jet-label value="Seleccione una fecha y una hora" class="mb-2 mt-6" />
                 <div class="mb-6 flex-1">
-                    <x-jet-input type="date" wire:model.defer="dates.date"
-                        placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
+                    <input type="date" wire:model.defer="dates.date" min=<?php $hoy=date("Y-m-d"); echo $hoy;?>>
                     <x-jet-input-error for="dates.date" />
 
                     <x-jet-input type="time" wire:model.defer="dates.time"
@@ -219,8 +236,7 @@
 
                         <x-jet-label value="Seleccione una fecha y una hora" class="mb-2" />
                         <div class="mb-6 flex-1">
-                            <x-jet-input type="date" wire:model.defer="dates.date1"
-                                placeholder="Ej. Calle Hoyos Nº. 50, Zona central" class="mb-3" />
+                            <input type="date" wire:model.defer="dates.date1" min=<?php $hoy=date("Y-m-d"); echo $hoy;?>>
                             <x-jet-input-error for="dates.date1" />
 
                             <x-jet-input type="time" wire:model.defer="dates.time1"
@@ -276,11 +292,12 @@
 
             <hr>
             <p class="text-sm text-gray-700 mt-2 text-justify">Las fechas reservadas <strong class="uppercase">
-                 NO PUEDEN SER MODIFICADAS</strong> una vez que el pago por el servicio 
-                 se haya hecho efectivo, esto se realiza de esta forma para ofrecer un mejor servicio al cliente, 
-                 ya que se reservarán nuestros equipos con anticipación para la fecha solicitada por el usuario, 
-                 un cambio a última hora podría afectar la calidad del servicio.
-                 <a class="font-semibold text-red-500" href="/politicas">Políticas de Uso y privacidad</a> </p>
+                    NO PUEDEN SER MODIFICADAS</strong> una vez que el pago por el servicio
+                se haya hecho efectivo, esto se realiza de esta forma para ofrecer un mejor servicio al cliente,
+                ya que se reservarán nuestros equipos con anticipación para la fecha solicitada por el usuario,
+                un cambio a última hora podría afectar la calidad del servicio.
+                <a class="font-semibold text-red-500" href="/politicas">Políticas de Uso y privacidad</a>
+            </p>
         </div>
 
 

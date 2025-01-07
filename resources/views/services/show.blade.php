@@ -2,7 +2,7 @@
     <div class="container">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-8">
             <div>
-                <img src="{{ Storage::url($service->image); }}" alt="">
+                <img class="rounded-lg" src="{{ Storage::url($service->image); }}" alt="">
             </div>
             <div class="" >
                 <div class="w-full">

@@ -17,8 +17,11 @@ class CreateOrder extends Component
 
     //Image
     public $url, $invitation, $tmp;
-    
+
     public $service;
+    public $min = 0;
+    public $price;
+    public $totalmin;
     public $schedules;
 
     //Error for dates reservartions
@@ -26,16 +29,16 @@ class CreateOrder extends Component
     public $modal1 = false;
     public $date_error;
     public $date_error1;
-    
+
     //information for delivery
     public $delivery_type = 1;
     public $contact, $phone, $address, $shipping_cost = 10;
-    
+
     //information for address
     public $address_state = 1;
     public $address_1, $address_2;
     public $lat, $lng, $lat1, $lng1;
-    
+
     //information for date and time
     public $dates = [
         'date' => null,
@@ -61,7 +64,7 @@ class CreateOrder extends Component
 
     protected $listeners = [
         'getLatitudeForInput',
-        'getLatitudeForInput2', 
+        'getLatitudeForInput2',
         'create_order'
     ];
 
@@ -70,6 +73,15 @@ class CreateOrder extends Component
         $this->service = $service;
         $this->schedules = new Date();
         $this->schedules = Date::all();
+
+        $price = Information::first();
+        $this->price = $price->cost;
+    }
+
+    public function price()
+    {
+        $this->totalmin = round($this->price*$this->min/60, 1);
+
     }
 
     public function updatedInvitation()
@@ -171,7 +183,7 @@ class CreateOrder extends Component
             $order->service = json_encode($this->service);
             $order->delivery_type = $this->delivery_type;
             $order->shipping_cost = 0;
-            $order->total = $this->service->price;
+            $order->total = $this->service->price + $this->totalmin;
             $order->invitation = $this->url;
             $order->name_contact = $this->contact;
             $order->phone_contact = $this->phone;
@@ -180,10 +192,10 @@ class CreateOrder extends Component
 
             $order->save();
 
-            //Adress 
-            $address->address = $this->address_1;
-            $address->lat = $this->lat;
-            $address->lng = $this->lng;
+            //Adress
+            $address->address = '$this->address_1';
+            $address->lat = '$this->lat';
+            $address->lng = '$this->lng';
             $address->order_id = $order->id;
             $address->save();
 
@@ -202,7 +214,7 @@ class CreateOrder extends Component
             $order->service = json_encode($this->service);
             $order->delivery_type = $this->delivery_type;
             $order->shipping_cost = $this->shipping_cost;
-            $order->total = $this->service->price + $this->shipping_cost;
+            $order->total = $this->service->price + $this->shipping_cost + $this->totalmin;
             $order->invitation = $this->url;
             $order->name_contact = $this->contact;
             $order->phone_contact = $this->phone;
@@ -212,7 +224,7 @@ class CreateOrder extends Component
 
             $order->save();
 
-            //Adress 
+            //Adress
             $address->address = $this->address_1;
             $address->lat = $this->lat;
             $address->lng = $this->lng;

@@ -16,6 +16,8 @@ class PaymentOrder extends Component
 
     public $order, $user, $dates, $servic;
     public $uuid;
+    public $paypal, $usd, $toMail;
+
 
     protected $listeners = ['payOrder'];
 
@@ -25,8 +27,27 @@ class PaymentOrder extends Component
         $this->dates = json_decode($order->dates, true);
         $this->user = $order->user()->first();
 
+        $this->usd();
+        $this->paypal = round($order->total / $this->usd, 1);
+
         /* Service */
         $this->servic = json_decode($order->service, true);
+    }
+
+    public function usd()
+    {
+        $url = "https://openexchangerates.org/api/latest.json?app_id=b16a5c9073fa42918e7be1c0f4fee98f";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $response = curl_exec($ch);
+        $arr_result = json_decode($response, true);
+        if (isset($arr_result['base'])) {
+            $arr = $arr_result['rates'];
+            $this->usd = $arr['BOB'];
+        } else {
+            $this->usd = 6.96;
+        }
     }
 
     public function payOrder()
@@ -75,8 +96,6 @@ class PaymentOrder extends Component
         $fecha_expiracion = new \DateTime();
         $fecha_expiracion->add(new \DateInterval('P1D'));
         $uuid = (string) Str::uuid();
-        //$this->uuid = $uuid;
-        //$id = str_pad($this->order->id, 4, '0', STR_PAD_LEFT);
 
         $appkey = 'aa5bc37a-14a3-5934-b2e9-bec7777cd4d8';
         $data = array(
@@ -108,14 +127,13 @@ class PaymentOrder extends Component
 
         $this->order->url_transaction = $res->getLink();
         $this->order->save();
-        
+
         if (empty($res->getLink())) {
             session()->flash('error', $res->mensaje());
             return null;
         } else {
             return redirect($res->getLink());
         }
-
     }
 
     public function render()

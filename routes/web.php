@@ -36,6 +36,7 @@ use App\Http\Controllers\CategoryController;
 Route::post('api/pago-exitoso', [PaymentController::class, 'payOrder'])->name('pay.order');
 Route::get('api/successful-pay', [PaymentController::class, 'payOrderGet'])->name('pay.get');
 Route::get('api/successful-autopay', [PaymentController::class, 'payOrderauto'])->name('pay.auto');
+
 /* libelula url_retorno*/
 Route::get('ticket_cliente/{id}',[Ticket_ClienteController::class,'ticketCliente'])->name('ticket_cliente');
 

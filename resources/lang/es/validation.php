@@ -131,7 +131,7 @@ return [
 
     'custom' => [
         'password' => [
-            'min' => 'La :attribute debe contener más de :min caracteres',
+            'min' => 'La :attribute debe contener más de :min caracteres.',
         ],
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
@@ -144,31 +144,39 @@ return [
             'numeric' => 'El teléfono debe ser numérico.',
         ],
         'address'    => [
-            'required' => 'La dirección es obligatoria',
+            'required' => 'La dirección es obligatoria.',
         ],
         'address_1'    => [
-            'required' => 'La dirección principal es obligatoria',
+            'required' => 'La dirección principal es obligatoria.',
         ],
         'lat'    => [
-            'required' => 'La ubicación en el mapa es obligatoria',
+            'required' => 'La ubicación en el mapa es obligatoria.',
         ],
         'lat1'    => [
-            'required' => 'La segunda ubicación en el mapa es obligatoria',
+            'required' => 'La segunda ubicación en el mapa es obligatoria.',
         ],
         'dates.date'    => [
-            'required' => 'La fecha principal del evento es obligatoria',
+            'required' => 'La fecha principal del evento es obligatoria.',
         ],
         'dates.time'    => [
-            'required' => 'La hora del evento es obligatoria',
+            'required' => 'La hora del evento es obligatoria.',
         ],
         'dates.date1'    => [
-            'required' => 'La fecha secundaria del evento es obligatoria',
+            'required' => 'La fecha secundaria del evento es obligatoria.',
         ],
         'dates.time1'    => [
-            'required' => 'La hora del evento es obligatoria',
+            'required' => 'La hora del evento es obligatoria.',
         ],
         'address_2'    => [
-            'required' => 'La dirección secundaria es obligatoria',
+            'required' => 'La dirección secundaria es obligatoria.',
+        ],
+        'image'    => [
+            'required' => 'El campo imagen es obligatoria.',
+            'image' => 'El campo imagen debe ser una imagen.',
+            'uploaded' => 'Subir imagen ha fallado.',
+        ],
+        'category_id'    => [
+            'required' => 'El campo categoria es obligatoria.',
         ],
     ],
 
@@ -216,5 +224,8 @@ return [
         'title'                 => 'título',
         'username'              => 'usuario',
         'year'                  => 'año',
+        'telephone'             => 'teléfono',
+        'schedule'              => 'horario',
+        'orders'                => 'servicios',
     ],
 ];

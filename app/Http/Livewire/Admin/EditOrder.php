@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Date;
 use App\Models\Order;
 use App\Models\Photo;
 use Livewire\Component;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class EditOrder extends Component
 {
 
-    public $order, $status;
+    public $order, $status, $dates, $servic;
     public $whatsApp, $message;
 
     /* Map */
@@ -33,6 +33,11 @@ class EditOrder extends Component
     public function mount(Order $order)
     {
         $this->order = $order;
+        $this->dates = json_decode($order->dates, true);
+
+        /* Service */
+        $this->servic = json_decode($order->service, true);
+
         $this->status = $order->status;
         /* $this->user = User::where('id', $order->user_id)->first(); */
         $this->user = $order->user()->first();
@@ -74,11 +79,10 @@ class EditOrder extends Component
             array_push($this->coordinates, $address->lat);
             array_push($this->coordinates, $address->lng);
         }
-        
+
         if (isset($this->coordinates[2])) {
             $this->addresses = 1;
         }
-
     }
 
     public function save()
@@ -89,7 +93,7 @@ class EditOrder extends Component
         $this->order->save();
         $this->emit('saved');
     }
-    
+
     public function updateState($state)
     {
         /*         $rules = $this->rules;
@@ -97,7 +101,7 @@ class EditOrder extends Component
 
         $this->order->status = $state;
         $this->order->save();
-        
+
         $this->render();
 
         /* WhatsApp notify */
@@ -120,6 +124,7 @@ class EditOrder extends Component
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
+                $this->pay();
                 break;
             case '3':
                 $this->message = "Su reserva a cambiado al estado EN EDICIÓN, puede ver el estado de su reserva en http://aquastudios.test/orders/" . $this->order->id;
@@ -160,6 +165,7 @@ class EditOrder extends Component
                     'id' => $this->order->id
                 ];
                 $this->user->notify(new NotifyUser($this->toMail));
+                $this->delete();
                 break;
             default:
                 $this->message = "hola";
@@ -179,6 +185,47 @@ class EditOrder extends Component
     public function refreshOrder()
     {
         $this->order = $this->order->fresh();
+    }
+
+    public function delete()
+    {
+        Date::where('order_id', $this->order->id)->delete();
+    }
+
+    public function pay()
+    {
+        /* Telegram notify */
+        $bot = new \TelegramBot\Api\BotApi(env('BOT_API_TOKEN_TELEGRAM'));
+        $id = strval($this->order->id);
+        $bot->sendMessage(-426827268, 'Se ha registrado una nueva reserva, ver la reserva en http://aquastudios.test/admin/orders/' . $id . '/edit');
+
+        /* Mail notify */
+        $this->toMail = [
+            'message' => 'Su pago a sido verificado, puede ver el estado de su reserva en el siguente enlace',
+            'id' => $this->order->id
+        ];
+        $this->user->notify(new NotifyUser($this->toMail));
+
+        /* Save date on schedule */
+        $date = new Date();
+        $date->date = $this->dates['date'];
+        $date->time = $this->dates['time'];
+        $date->name = $this->servic['name'];
+        $date->url = 'orders/' . $this->order->id . '/edit';
+        $date->category_id = $this->servic['category_id'];
+        $date->order_id = $this->order->id;
+        $date->save();
+
+        if (isset($this->dates['date1'])) {
+            $date1 = new Date();
+            $date1->date = $this->dates['date1'];
+            $date1->time = $this->dates['time1'];
+            $date1->name = $this->servic['name'];
+            $date1->url = 'orders/' . $this->order->id . '/edit';
+            $date1->category_id = $this->servic['category_id'];
+            $date1->order_id = $this->order->id;
+            $date1->save();
+        }
     }
 
     public function render()

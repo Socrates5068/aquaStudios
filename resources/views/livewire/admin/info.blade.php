@@ -84,8 +84,21 @@
                     <x-jet-label class="flex justify-between">
                         Número de servicios por día  <i class="fas fa-concierge-bell text-2xl font-bold text-yellow-600"></i>
                     </x-jet-label>
-                    <input wire:model.defer="orders" type="text" class="input input-success input-bordered w-full mt-1"> 
+                    <input wire:model.defer="orders" type="text" class="input input-warning input-bordered w-full mt-1 text-right"> 
                     <x-jet-input-error for="orders" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label class="flex justify-between mb-2">
+                        Precio por hora  <i class="fas fa-dollar-sign text-2xl font-bold"></i>
+                    </x-jet-label>
+                    <label class="input-group input-group-sm ">                        
+                        <input wire:model.defer="cost" type="text" class="input input-bordered input-sm w-full text-right"> 
+                        <span>BOB</span>
+                      </label>
+                    
+                   
+                    <x-jet-input-error for="cost" />
                 </div>
                 
             </x-slot>
